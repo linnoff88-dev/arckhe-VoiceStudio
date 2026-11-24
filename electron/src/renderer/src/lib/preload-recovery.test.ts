@@ -19,7 +19,7 @@ function harness() {
       healthy = callback;
     },
   });
-  return { target, reload, markHealthy: () => healthy?.() };
+  return { target, reload, mARCKHEalthy: () => healthy?.() };
 }
 
 describe('preload recovery', () => {
@@ -37,9 +37,9 @@ describe('preload recovery', () => {
   });
 
   it('allows recovery again after the reloaded app stays healthy', () => {
-    const { target, reload, markHealthy } = harness();
+    const { target, reload, mARCKHEalthy } = harness();
     target.dispatchEvent(new Event('vite:preloadError', { cancelable: true }));
-    markHealthy();
+    mARCKHEalthy();
     target.dispatchEvent(new Event('vite:preloadError', { cancelable: true }));
     expect(reload).toHaveBeenCalledTimes(2);
   });
