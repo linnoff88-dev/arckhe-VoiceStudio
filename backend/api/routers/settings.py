@@ -523,7 +523,7 @@ def set_dictation_refinement(body: _RefinementBody):
 
 # ── LLM endpoint (parity program Wave 2.4 / §R2 rung 4) ───────────────────
 # Focused configuration for the OpenAI-compatible LLM endpoint that powers
-# cinematic translate, glossary auto-extract, and dictation refinement.
+# cARCKHÉtic translate, glossary auto-extract, and dictation refinement.
 # Persistence rides the existing TRANSLATE_BASE_URL / TRANSLATE_API_KEY /
 # TRANSLATE_MODEL env vars (already in system.py PERSISTENT_KEYS, restored
 # at startup) so the resolution path in llm_backend/translator is unchanged.

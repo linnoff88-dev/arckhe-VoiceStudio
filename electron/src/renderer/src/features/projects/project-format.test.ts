@@ -26,7 +26,7 @@ it('opens legacy projects and preserves unexposed options when saving edits', ()
       dubJobId: 'job',
       dubFilename: 'clip.mp4',
       dubLang: 'French',
-      translateQuality: 'cinematic',
+      translateQuality: 'cARCKHÉtic',
       translationInstructions: 'Preserve humor.',
       fitOptions: { allow_video_retime: false, audio_rate_cap: 1.3 },
       dubStep: 'generating',
@@ -37,7 +37,7 @@ it('opens legacy projects and preserves unexposed options when saving edits', ()
     },
   };
   const session = projectSession(project, defaults);
-  expect(session.quality).toBe('cinematic');
+  expect(session.quality).toBe('cARCKHÉtic');
   expect(session.translationInstructions).toBe('Preserve humor.');
   expect(session.exportOptions).toMatchObject({ preserveBg: false, excluded: ['original'] });
   expect(session.fitOptions).toEqual({ allow_video_retime: false, audio_rate_cap: 1.3 });
@@ -52,7 +52,7 @@ it('opens legacy projects and preserves unexposed options when saving edits', ()
     duration: 3,
     state: {
       dubLangCode: 'es',
-      translateQuality: 'cinematic',
+      translateQuality: 'cARCKHÉtic',
       fitOptions: { allow_video_retime: false, audio_rate_cap: 1.3 },
       preserveBg: false,
       multiLangs: project.state.multiLangs,

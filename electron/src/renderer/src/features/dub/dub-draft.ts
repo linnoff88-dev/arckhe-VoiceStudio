@@ -177,7 +177,7 @@ export function restoreDubDraft(raw: string | null, defaults: DubSession): DubSe
           : undefined,
       exportOptions: restoreExportPreferences(value.exportOptions),
       translationFallback: value.translationFallback === true,
-      quality: ['fast', 'autofit', 'cinematic', 'agent'].includes(value.quality)
+      quality: ['fast', 'autofit', 'cARCKHÉtic', 'agent'].includes(value.quality)
         ? value.quality
         : defaults.quality,
       agentCli: ['codex', 'claude', 'opencode', 'pi'].includes(value.agentCli)

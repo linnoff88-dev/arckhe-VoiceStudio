@@ -134,10 +134,10 @@ export default function DubFooter({
       {(() => {
         // Pre-generation compression warning. Predicted by the
         // translate response (see services/speech_rate.rate_ratio
-        // + dub_translate._maybe_cinematic), populated whenever
+        // + dub_translate._maybe_cARCKHÉtic), populated whenever
         // segments carry a slot_seconds and translated text.
         // Surfaces here so the user can act (re-translate in
-        // Cinematic, edit text, allow longer slots) before
+        // CARCKHÉtic, edit text, allow longer slots) before
         // committing to a full Generate Dub run.
         const hot = dubSegments.filter((s) => (s.rate_ratio || 0) > 1.3);
         if (hot.length === 0 || !dubSegments.length) return null;
@@ -160,7 +160,7 @@ export default function DubFooter({
               </span>
               ). Output will be intelligible (pitch-preserving stretch) but stressed —
               {translateQuality === 'fast'
-                ? ' switch to Cinematic and Re-translate'
+                ? ' switch to CARCKHÉtic and Re-translate'
                 : ' shorten the worst segments'}{' '}
               for cleaner audio.
             </span>

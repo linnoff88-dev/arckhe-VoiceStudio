@@ -34,9 +34,9 @@ def test_glossary_text_includes_each_term():
 # ── No-LLM graceful path ───────────────────────────────────────────────────
 
 
-def test_cinematic_no_llm_returns_literal_with_marker(monkeypatch):
+def test_cARCKHÉtic_no_llm_returns_literal_with_marker(monkeypatch):
     monkeypatch.setattr(tr, "_llm_client", lambda: None)
-    res = tr.cinematic_refine_sync(
+    res = tr.cARCKHÉtic_refine_sync(
         "Hello.",
         "Hola.",
         source_lang="en",
@@ -50,8 +50,8 @@ def test_cinematic_no_llm_returns_literal_with_marker(monkeypatch):
     assert "error" not in res
 
 
-def test_cinematic_empty_literal_is_passthrough():
-    res = tr.cinematic_refine_sync(
+def test_cARCKHÉtic_empty_literal_is_passthrough():
+    res = tr.cARCKHÉtic_refine_sync(
         "Source",
         "",
         source_lang="en",
@@ -66,7 +66,7 @@ def test_cinematic_empty_literal_is_passthrough():
 # ── Happy-path 3-step chain (mocked client) ────────────────────────────────
 
 
-def test_cinematic_full_chain_with_mocked_llm(monkeypatch):
+def test_cARCKHÉtic_full_chain_with_mocked_llm(monkeypatch):
     calls = []
     responses = iter([
         "reads stiff; prefer idiomatic phrasing",  # reflect
@@ -81,7 +81,7 @@ def test_cinematic_full_chain_with_mocked_llm(monkeypatch):
     monkeypatch.setattr(tr, "_llm_client", lambda: mock_client)
     monkeypatch.setattr(tr, "_chat", fake_chat)
 
-    res = tr.cinematic_refine_sync(
+    res = tr.cARCKHÉtic_refine_sync(
         "Hello, world.",
         "Hola mundo.",
         source_lang="en",
@@ -97,7 +97,7 @@ def test_cinematic_full_chain_with_mocked_llm(monkeypatch):
     assert "world → mundo" in calls[1]["system"]
 
 
-def test_cinematic_reflect_failure_returns_literal(monkeypatch):
+def test_cARCKHÉtic_reflect_failure_returns_literal(monkeypatch):
     mock_client = MagicMock()
     monkeypatch.setattr(tr, "_llm_client", lambda: mock_client)
 
@@ -105,7 +105,7 @@ def test_cinematic_reflect_failure_returns_literal(monkeypatch):
         raise RuntimeError("LLM down")
     monkeypatch.setattr(tr, "_chat", boom)
 
-    res = tr.cinematic_refine_sync(
+    res = tr.cARCKHÉtic_refine_sync(
         "Hello",
         "Hola",
         source_lang="en",
@@ -121,18 +121,18 @@ def test_cinematic_reflect_failure_returns_literal(monkeypatch):
 
 
 def _mock_chain(monkeypatch, reflect: str, adapt: str):
-    """Wire cinematic_refine_sync to a mocked 2-step REFLECT→ADAPT chain."""
+    """Wire cARCKHÉtic_refine_sync to a mocked 2-step REFLECT→ADAPT chain."""
     responses = iter([reflect, adapt])
     monkeypatch.setattr(tr, "_llm_client", lambda: MagicMock())
     monkeypatch.setattr(tr, "_chat", lambda client, *, system, user: next(responses))
 
 
-def test_cinematic_adapt_runaway_length_falls_back_to_literal(monkeypatch):
+def test_cARCKHÉtic_adapt_runaway_length_falls_back_to_literal(monkeypatch):
     """The reported bug: for a Latin-script target the script check passes ANY
     text, so a hallucinated wall of dialogue used to ship as the dub line."""
     literal = "¿Cómo estás hoy, amigo mío?"
     _mock_chain(monkeypatch, "fine but a bit stiff", "Hola amigo. " * 30)  # ~13× the literal
-    res = tr.cinematic_refine_sync(
+    res = tr.cARCKHÉtic_refine_sync(
         "How are you doing today, my friend?", literal,
         source_lang="en", target_lang="es",
     )
@@ -142,7 +142,7 @@ def test_cinematic_adapt_runaway_length_falls_back_to_literal(monkeypatch):
     assert res["critique"] == "fine but a bit stiff"  # UI still sees what happened
 
 
-def test_cinematic_adapt_critique_echo_rejected(monkeypatch):
+def test_cARCKHÉtic_adapt_critique_echo_rejected(monkeypatch):
     """ADAPT returning the critique itself must not become the dub line."""
     literal = "¿Cómo estás hoy, amigo mío? Hace mucho que no te veo por aquí."
     critique = (
@@ -150,7 +150,7 @@ def test_cinematic_adapt_critique_echo_rejected(monkeypatch):
         "prefer a shorter, more idiomatic phrasing with warmer tone."
     )
     _mock_chain(monkeypatch, critique, critique)  # adapt echoes the critique verbatim
-    res = tr.cinematic_refine_sync(
+    res = tr.cARCKHÉtic_refine_sync(
         "How are you doing today, my friend? Long time no see.", literal,
         source_lang="en", target_lang="es",
     )
@@ -159,12 +159,12 @@ def test_cinematic_adapt_critique_echo_rejected(monkeypatch):
     assert "error" not in res
 
 
-def test_cinematic_sane_adaptation_accepted(monkeypatch):
+def test_cARCKHÉtic_sane_adaptation_accepted(monkeypatch):
     """A faithful, idiomatic rewrite passes every guard untouched."""
     literal = "¿Cómo estás hoy, amigo mío? Hace mucho que no te veo."
     adapted = "¿Qué tal, amigo? ¡Cuánto tiempo sin verte!"
     _mock_chain(monkeypatch, "a bit formal; contract it", adapted)
-    res = tr.cinematic_refine_sync(
+    res = tr.cARCKHÉtic_refine_sync(
         "How are you doing today, my friend? Long time no see.", literal,
         source_lang="en", target_lang="es",
     )
@@ -172,12 +172,12 @@ def test_cinematic_sane_adaptation_accepted(monkeypatch):
     assert "error" not in res
 
 
-def test_cinematic_adapt_wrong_script_falls_back_to_literal(monkeypatch):
+def test_cARCKHÉtic_adapt_wrong_script_falls_back_to_literal(monkeypatch):
     """ADAPT output off the target script degrades to the literal with the
     script-specific marker (the pre-existing fallback, previously untested)."""
     literal = "नमस्ते मेरे दोस्त, आप कैसे हैं?"
     _mock_chain(monkeypatch, "solid but wordy", "This is English, not Hindi, sorry.")
-    res = tr.cinematic_refine_sync(
+    res = tr.cARCKHÉtic_refine_sync(
         "Hello my friend, how are you?", literal,
         source_lang="en", target_lang="hi",
     )
@@ -187,7 +187,7 @@ def test_cinematic_adapt_wrong_script_falls_back_to_literal(monkeypatch):
 
 
 def test_chat_pins_low_temperature(monkeypatch):
-    """Cinematic reflect/adapt must pin temperature like the Fast path does —
+    """CARCKHÉtic reflect/adapt must pin temperature like the Fast path does —
     the provider default of 1.0 is what let local models drift into invention."""
     client = MagicMock()
     client.chat.completions.create.return_value = MagicMock(
@@ -212,31 +212,31 @@ def test_refine_guard_ratio_env_override(monkeypatch):
     assert not ok and reason.startswith("length-ratio")
     monkeypatch.setenv("OMNIVOICE_REFINE_RATIO_MAX", "5.0")
     ok, _ = tr.refine_output_ok(literal, literal * 4, "es")
-    assert ok  # ceiling raised via env, mirroring the _cinematic_budget pattern
+    assert ok  # ceiling raised via env, mirroring the _cARCKHÉtic_budget pattern
 
 
-# ── Cinematic pass wall-clock budget (#stall follow-up) ────────────────────
+# ── CARCKHÉtic pass wall-clock budget (#stall follow-up) ────────────────────
 
-def test_cinematic_budget_degrades_slow_segments_to_literal(monkeypatch):
+def test_cARCKHÉtic_budget_degrades_slow_segments_to_literal(monkeypatch):
     """A slow LLM must not hang the translate: the pass returns within the
     budget and unfinished segments fall back to their literal translation."""
     import asyncio
     import time
     from concurrent.futures import ThreadPoolExecutor
 
-    monkeypatch.setenv("OMNIVOICE_CINEMATIC_BUDGET_S", "0.3")
+    monkeypatch.setenv("OMNIVOICE_CARCKHÉTIC_BUDGET_S", "0.3")
 
     def _slow(src, lit, **kw):
         time.sleep(3.0)  # far over the 0.3s budget
         return {"text": "REFINED", "literal": lit, "critique": ""}
 
-    monkeypatch.setattr(tr, "cinematic_refine_sync", _slow)
+    monkeypatch.setattr(tr, "cARCKHÉtic_refine_sync", _slow)
     pairs = [("s1", "hi", "hola"), ("s2", "world", "mundo")]
 
     async def _run():
         ex = ThreadPoolExecutor(max_workers=4)
         t0 = time.time()
-        out = await tr.cinematic_refine_many(
+        out = await tr.cARCKHÉtic_refine_many(
             pairs, source_lang="en", target_lang="es", executor=ex,
         )
         return time.time() - t0, out
@@ -246,23 +246,23 @@ def test_cinematic_budget_degrades_slow_segments_to_literal(monkeypatch):
     assert [r["id"] for r in out] == ["s1", "s2"]      # order + length preserved
     for r in out:
         assert r["text"] == r["literal"]                # degraded to literal
-        assert r.get("degraded") == "cinematic-budget"
+        assert r.get("degraded") == "cARCKHÉtic-budget"
         assert "error" not in r
 
 
-def test_cinematic_budget_disabled_runs_to_completion(monkeypatch):
+def test_cARCKHÉtic_budget_disabled_runs_to_completion(monkeypatch):
     """Budget <= 0 disables the bound — every segment gets its refine."""
     import asyncio
     from concurrent.futures import ThreadPoolExecutor
 
-    monkeypatch.setenv("OMNIVOICE_CINEMATIC_BUDGET_S", "0")
+    monkeypatch.setenv("OMNIVOICE_CARCKHÉTIC_BUDGET_S", "0")
     monkeypatch.setattr(
-        tr, "cinematic_refine_sync",
+        tr, "cARCKHÉtic_refine_sync",
         lambda src, lit, **kw: {"text": f"R:{lit}", "literal": lit, "critique": ""},
     )
 
     async def _run():
-        return await tr.cinematic_refine_many(
+        return await tr.cARCKHÉtic_refine_many(
             [("s1", "hi", "hola")], source_lang="en", target_lang="es",
             executor=ThreadPoolExecutor(max_workers=2),
         )
@@ -385,7 +385,7 @@ def test_chat_non_429_does_not_retry(monkeypatch):
 
 def test_chat_strips_prefilled_reasoning(monkeypatch):
     """A local reasoning model served without a reasoning parser must not leak
-    its monologue into the Cinematic output."""
+    its monologue into the CARCKHÉtic output."""
     client = MagicMock()
     client.chat.completions.create.return_value = MagicMock(
         choices=[MagicMock(message=MagicMock(content="Keep it short.\n</think>\n\nHola, amigo."))])
@@ -458,10 +458,10 @@ def test_hindi_and_chinese_gates_unchanged_by_shared_ranges():
     assert LANG_REQUIRED_SCRIPT["ja"][0] == "JAPANESE"
 
 
-def test_cinematic_accepts_kanji_majority_japanese(monkeypatch):
+def test_cARCKHÉtic_accepts_kanji_majority_japanese(monkeypatch):
     literal = "私は東京へ行く。"
     _mock_chain(monkeypatch, "fine", _JA_KANJI_MAJORITY)
-    res = tr.cinematic_refine_sync(
+    res = tr.cARCKHÉtic_refine_sync(
         "I am going to Tokyo.", literal, source_lang="en", target_lang="ja",
     )
     assert res["text"] == _JA_KANJI_MAJORITY

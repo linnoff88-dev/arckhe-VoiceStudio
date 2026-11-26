@@ -17,8 +17,8 @@ Examples
     # YouTube / URL ingest:
     omnivoice-dub --url https://youtu.be/... --target ja
 
-    # Cinematic quality + glossary file (JSON: [{source,target,note}]):
-    omnivoice-dub video.mp4 --target es --quality cinematic --glossary terms.json
+    # CARCKHÉtic quality + glossary file (JSON: [{source,target,note}]):
+    omnivoice-dub video.mp4 --target es --quality cARCKHÉtic --glossary terms.json
 """
 from __future__ import annotations
 
@@ -114,7 +114,7 @@ def main(argv=None):
     src.add_argument("--url", help="YouTube or direct video URL.")
     ap.add_argument("--target", required=True, help="Target language ISO code (e.g. de, ja, es).")
     ap.add_argument("--voice", help="Voice profile ID to apply to every segment.")
-    ap.add_argument("--quality", choices=("fast", "cinematic"), default="fast")
+    ap.add_argument("--quality", choices=("fast", "cARCKHÉtic"), default="fast")
     ap.add_argument(
         "--speakers", type=int, default=None, metavar="N",
         help="Exact number of speakers in the source (1-20). Forwarded to "

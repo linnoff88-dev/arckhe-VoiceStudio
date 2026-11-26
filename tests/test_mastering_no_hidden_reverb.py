@@ -3,7 +3,7 @@ Regression tests: the mastering pre-stage must not hide a reverb.
 
 A hardcoded Reverb inside apply_mastering() used to bake echo into every
 non-raw synthesis regardless of the chosen effect preset (field reports of
-echoey voices; the podcast preset even promises "no reverb", and cinematic/
+echoey voices; the podcast preset even promises "no reverb", and cARCKHÉtic/
 warm got doubled reverb). Reverb is preset-declared only — these tests pin
 that contract.
 
@@ -54,7 +54,7 @@ class TestPresetReverbContract:
         """podcast's description literally promises "no reverb"."""
         assert "reverb" not in _stage_types(EFFECT_PRESETS[preset_id]["chain"])
 
-    @pytest.mark.parametrize("preset_id", ["cinematic", "warm"])
+    @pytest.mark.parametrize("preset_id", ["cARCKHÉtic", "warm"])
     def test_user_chosen_reverb_survives(self, preset_id):
         """Presets that deliberately declare reverb must keep it."""
         assert "reverb" in _stage_types(EFFECT_PRESETS[preset_id]["chain"])

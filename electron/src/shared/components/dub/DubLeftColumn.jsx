@@ -401,7 +401,7 @@ export default function DubLeftColumn({
                 {
                   fast: 'dub.fast_quality',
                   autofit: 'dub.autofit_quality',
-                  cinematic: 'dub.cinematic_quality',
+                  cARCKHÉtic: 'dub.cARCKHÉtic_quality',
                 }[translateQuality] || 'dub.fast_quality',
               )}{' '}
               · {activeEngineEntry?.display_name || translateProvider}
@@ -647,7 +647,7 @@ export default function DubLeftColumn({
                     value: 'autofit',
                     label: t('dub.autofit_quality', { defaultValue: 'Autofit' }),
                   },
-                  { value: 'cinematic', label: t('dub.cinematic_quality') },
+                  { value: 'cARCKHÉtic', label: t('dub.cARCKHÉtic_quality') },
                 ]}
               />
               {/* Opt-in (default OFF): when the duration planner marks a

@@ -1,4 +1,4 @@
-name: Deploy guia to Pages (INEMA)
+name: Deploy guia to Pages (ARCKHÉ)
 on:
   push: { branches: [main], paths: ['guia/**', '.github/workflows/pages.yml'] }
   workflow_dispatch:

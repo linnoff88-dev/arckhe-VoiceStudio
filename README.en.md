@@ -1,6 +1,6 @@
 # VoiceStudio
 
-[![VoiceStudio — your voice, local](guia/assets/banner-en.jpg)](https://inematds.github.io/VoiceStudio/guia/en/)
+[![VoiceStudio — your voice, local](guia/assets/banner-en.jpg)](https://linnoff88-dev.github.io/arckhe-/guia/en/)
 
 **🇧🇷 [Português](README.md) · 🇺🇸 [English](README.en.md) · 🇪🇸 [Español](README.es.md)**
 
@@ -10,13 +10,13 @@ VoiceStudio is a free, open-source program that does on your own computer what p
 
 ## 📖 User guide
 
-Full guide (landing + step by step): **https://inematds.github.io/VoiceStudio/guia/en/**
+Full guide (landing + step by step): **https://linnoff88-dev.github.io/arckhe-/guia/en/**
 
 🎬 Video: https://www.youtube.com/shorts/RlPeasc5dUw
 
 ## Origin and license
 
-This repository is a **mirror** of [debpalash/VoiceStudio](https://github.com/debpalash/VoiceStudio), maintained by [INEMA.CLUB](https://inema.club) with a guide in Portuguese, English and Spanish. All code belongs to the original project, under the **AGPL-3.0** license ([LICENSE](LICENSE), [LICENSE-NOTICE.md](LICENSE-NOTICE.md)). Voice models have their own licenses. Only clone voices with the speaker's permission.
+This repository is a **mirror** of [debpalash/VoiceStudio](https://github.com/debpalash/VoiceStudio), maintained by [ARCKHÉ AI](https://ARCKHÉ AI) with a guide in Portuguese, English and Spanish. All code belongs to the original project, under the **AGPL-3.0** license ([LICENSE](LICENSE), [LICENSE-NOTICE.md](LICENSE-NOTICE.md)). Voice models have their own licenses. Only clone voices with the speaker's permission.
 
 - Original README: [README.upstream.md](README.upstream.md)
 - Official documentation: [docs/](docs/)
@@ -29,6 +29,6 @@ This repository is a **mirror** of [debpalash/VoiceStudio](https://github.com/de
 curl -fsSL https://voicestudio.sh/install | sh
 
 # from source (also Linux ARM64)
-git clone https://github.com/inematds/VoiceStudio.git
+git clone https://github.com/linnoff88-dev/VoiceStudio.git
 cd VoiceStudio && bun install && bun run setup:api && bun run dev
 ```

@@ -1,6 +1,6 @@
 # VoiceStudio
 
-[![VoiceStudio — tu voz local](guia/assets/banner-es.jpg)](https://inematds.github.io/VoiceStudio/guia/es/)
+[![VoiceStudio — tu voz local](guia/assets/banner-es.jpg)](https://linnoff88-dev.github.io/arckhe-/guia/es/)
 
 **🇧🇷 [Português](README.md) · 🇺🇸 [English](README.en.md) · 🇪🇸 [Español](README.es.md)**
 
@@ -10,13 +10,13 @@ VoiceStudio es un programa gratuito y de código abierto que hace en tu computad
 
 ## 📖 Guía de uso
 
-Guía completa (landing + paso a paso): **https://inematds.github.io/VoiceStudio/guia/es/**
+Guía completa (landing + paso a paso): **https://linnoff88-dev.github.io/arckhe-/guia/es/**
 
 🎬 Video: https://www.youtube.com/shorts/RlPeasc5dUw
 
 ## Origen y licencia
 
-Este repositorio es un **espejo** de [debpalash/VoiceStudio](https://github.com/debpalash/VoiceStudio), mantenido por [INEMA.CLUB](https://inema.club) con la guía en portugués, inglés y español. Todo el código es del proyecto original, bajo la licencia **AGPL-3.0** ([LICENSE](LICENSE), [LICENSE-NOTICE.md](LICENSE-NOTICE.md)). Los modelos de voz tienen licencias propias. Clona voces solo con permiso de quien habla.
+Este repositorio es un **espejo** de [debpalash/VoiceStudio](https://github.com/debpalash/VoiceStudio), mantenido por [ARCKHÉ AI](https://ARCKHÉ AI) con la guía en portugués, inglés y español. Todo el código es del proyecto original, bajo la licencia **AGPL-3.0** ([LICENSE](LICENSE), [LICENSE-NOTICE.md](LICENSE-NOTICE.md)). Los modelos de voz tienen licencias propias. Clona voces solo con permiso de quien habla.
 
 - README original (en inglés): [README.upstream.md](README.upstream.md)
 - Documentación oficial: [docs/](docs/)
@@ -29,6 +29,6 @@ Este repositorio es un **espejo** de [debpalash/VoiceStudio](https://github.com/
 curl -fsSL https://voicestudio.sh/install | sh
 
 # desde el código fuente (también Linux ARM64)
-git clone https://github.com/inematds/VoiceStudio.git
+git clone https://github.com/linnoff88-dev/VoiceStudio.git
 cd VoiceStudio && bun install && bun run setup:api && bun run dev
 ```

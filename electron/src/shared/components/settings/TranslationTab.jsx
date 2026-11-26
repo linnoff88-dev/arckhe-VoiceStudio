@@ -2,9 +2,9 @@
  * Settings → Translation (consolidated category).
  *
  * Pulls the translation controls into one home:
- *   • translateQuality pref (fast | autofit | cinematic) — zustand store binding.
+ *   • translateQuality pref (fast | autofit | cARCKHÉtic) — zustand store binding.
  *   • A pointer to Settings → LLM Providers — the ONE place to configure the
- *     OpenAI-compatible LLM that powers Cinematic/Autofit translate, glossary
+ *     OpenAI-compatible LLM that powers CARCKHÉtic/Autofit translate, glossary
  *     extract, and dictation refinement. (Replaces the legacy inline LLM
  *     endpoint panel, whose TRANSLATE_* surface is fully covered by the
  *     registry's `custom` provider — a lone TRANSLATE_BASE_URL still resolves
@@ -97,7 +97,7 @@ export default function TranslationTab() {
         <SettingRow
           title={t('settings.translate_quality', { defaultValue: 'Translation quality' })}
           subtitle={t('settings.translate_quality_desc', {
-            defaultValue: 'Fast is literal and quick; Cinematic uses the LLM for natural phrasing.',
+            defaultValue: 'Fast is literal and quick; CARCKHÉtic uses the LLM for natural phrasing.',
           })}
           control={
             <Segmented
@@ -111,8 +111,8 @@ export default function TranslationTab() {
                   label: t('settings.translate_autofit', { defaultValue: 'Autofit' }),
                 },
                 {
-                  value: 'cinematic',
-                  label: t('settings.translate_cinematic', { defaultValue: 'Cinematic' }),
+                  value: 'cARCKHÉtic',
+                  label: t('settings.translate_cARCKHÉtic', { defaultValue: 'CARCKHÉtic' }),
                 },
               ]}
             />
@@ -124,7 +124,7 @@ export default function TranslationTab() {
         icon={Brain}
         title={t('settings.translation_llm', { defaultValue: 'Translation LLM' })}
         description={t('settings.translation_llm_desc', {
-          defaultValue: 'Cinematic and Autofit translation use a high-quality LLM.',
+          defaultValue: 'CARCKHÉtic and Autofit translation use a high-quality LLM.',
         })}
       >
         <SettingRow

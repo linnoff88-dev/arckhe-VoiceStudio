@@ -1009,7 +1009,7 @@ export default function useDubWorkflow({
         (data.translated || []).forEach((t) => {
           translatedMap[t.id] = t;
           if (t.error) errors.push({ id: t.id, error: t.error });
-          // Degraded ≠ failed: the segment translated fine but the cinematic
+          // Degraded ≠ failed: the segment translated fine but the cARCKHÉtic
           // polish pass was skipped (rate limit, budget, divergent reply) and
           // the literal text is in use. Counting these as errors used to show
           // "4/4 segment(s) failed" over a translate that succeeded.
@@ -1057,20 +1057,20 @@ export default function useDubWorkflow({
         // the follow-up generate render the source language verbatim.
         const total = (data.translated || []).length;
         ok = total > 0 && errors.length < total;
-        if (data.cinematic_skipped === 'no-llm-configured') {
-          toast(t('dub_workflow.cinematic_no_llm'), { icon: 'ℹ️', duration: 8000 });
+        if (data.cARCKHÉtic_skipped === 'no-llm-configured') {
+          toast(t('dub_workflow.cARCKHÉtic_no_llm'), { icon: 'ℹ️', duration: 8000 });
           // #372: the backend fell back to Fast — reflect that in the toggle so
-          // the UI doesn't claim Cinematic while delivering Fast.
+          // the UI doesn't claim CARCKHÉtic while delivering Fast.
           useAppStore.getState().setTranslateQuality?.('fast');
         }
         // #280: the user picked a dialect but the chosen engine can't honor it
         // (Argos/NLLB/Google in Fast mode). Tell them how to make it count.
-        // #372: skip when the cinematic toast above already fired — both at once
-        // sent users in a circle ("pick Cinematic" ↔ "Cinematic needs an LLM").
+        // #372: skip when the cARCKHÉtic toast above already fired — both at once
+        // sent users in a circle ("pick CARCKHÉtic" ↔ "CARCKHÉtic needs an LLM").
         if (
           data.dialect &&
           data.dialect_applied === false &&
-          data.cinematic_skipped !== 'no-llm-configured'
+          data.cARCKHÉtic_skipped !== 'no-llm-configured'
         ) {
           toast(t('dub_workflow.dialect_not_applied'), { icon: 'ℹ️', duration: 8000 });
         }
@@ -1103,7 +1103,7 @@ export default function useDubWorkflow({
         }
         if (!errors.length && !degraded.length) {
           const qLabel =
-            data.quality_used === 'cinematic' ? t('dub_workflow.translated_cinematic_suffix') : '';
+            data.quality_used === 'cARCKHÉtic' ? t('dub_workflow.translated_cARCKHÉtic_suffix') : '';
           toast.success(
             t('dub_workflow.translated_segments', {
               count: data.translated.length,

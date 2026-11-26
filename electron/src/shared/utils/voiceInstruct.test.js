@@ -188,7 +188,7 @@ describe('instructToVdStates', () => {
 
   it('ignores unknown and conflicting tokens while keeping the first valid category value', () => {
     expect(
-      instructToVdStates('MALE, female, cinematic, high pitch, very low pitch, whisper'),
+      instructToVdStates('MALE, female, cARCKHÉtic, high pitch, very low pitch, whisper'),
     ).toEqual({
       ...allAuto,
       Gender: 'male',

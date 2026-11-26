@@ -1,8 +1,8 @@
 """Autofit translation style — strict fit-to-slot (v0.3.8).
 
-Autofit = Cinematic + a hard "never exceed the segment time" bound. In the
+Autofit = CARCKHÉtic + a hard "never exceed the segment time" bound. In the
 speech-rate fit pass that means the accepted upper ratio is 1.0 (fit within the
-slot) instead of Cinematic's looser TOL_HIGH (1.08). Verifies the strict mode
+slot) instead of CARCKHÉtic's looser TOL_HIGH (1.08). Verifies the strict mode
 keeps trimming past the loose tolerance and that the no-LLM path still degrades
 gracefully.
 """
@@ -39,7 +39,7 @@ def speech_rate(monkeypatch):
 
 
 def test_loose_accepts_slight_overrun_without_llm(speech_rate):
-    # 16 chars @ 15 cps over a 1.0s slot → ratio ~1.067: within Cinematic's
+    # 16 chars @ 15 cps over a 1.0s slot → ratio ~1.067: within CARCKHÉtic's
     # TOL_HIGH (1.08), so it's accepted as-is with no LLM call.
     res = speech_rate.adjust_for_slot("A" * 16, slot_seconds=1.0, target_lang="en", strict=False)
     assert res["attempts"] == 0

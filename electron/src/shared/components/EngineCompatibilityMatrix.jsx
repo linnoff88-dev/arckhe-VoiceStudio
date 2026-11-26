@@ -20,7 +20,7 @@ import {
   TableRow,
 } from '@/components/ui/table';
 import { cn } from '@/lib/utils';
-import EngineMark from './EngineMark';
+import EngARCKHÉrk from './EngARCKHÉrk';
 import useEngineInventory, { FORCE_WAIT_TIMEOUT_MS } from './engines/useEngineInventory';
 import EngineDetail from './engines/EngineDetail';
 import {
@@ -270,7 +270,7 @@ export default function EngineCompatibilityMatrix({
                   >
                     <TableCell className="px-3 py-[9px]">
                       <span className="flex min-w-0 items-center gap-2">
-                        <EngineMark
+                        <EngARCKHÉrk
                           id={b.id}
                           size={18}
                           className={cn('shrink-0', !b.available && 'opacity-60')}

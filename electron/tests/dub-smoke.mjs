@@ -142,7 +142,7 @@ try {
     route.fulfill({
       json: {
         skills: [
-          { id: 'cinematic_translation', enabled: true, ready: false },
+          { id: 'cARCKHÉtic_translation', enabled: true, ready: false },
           { id: 'slot_fitting', enabled: true, ready: false },
         ],
       },
@@ -197,7 +197,7 @@ try {
     return route.fulfill({
       json: {
         translated: [{ id: '1', text: 'Hola' }],
-        cinematic_skipped: fallback ? 'no-llm-configured' : undefined,
+        cARCKHÉtic_skipped: fallback ? 'no-llm-configured' : undefined,
       },
     });
   });
@@ -372,11 +372,11 @@ try {
   assert.equal(generation, undefined, 'translation must remain reviewable before generation');
   await translatorPicker.getByRole('button', { name: 'Argos', exact: true }).click();
   // Translation controls stay expanded without an extra disclosure click.
-  await page.getByRole('button', { name: 'Cinematic', exact: true }).waitFor({ state: 'visible' });
-  await page.getByRole('button', { name: 'Cinematic', exact: true }).click();
+  await page.getByRole('button', { name: 'CARCKHÉtic', exact: true }).waitFor({ state: 'visible' });
+  await page.getByRole('button', { name: 'CARCKHÉtic', exact: true }).click();
   await page.getByRole('button', { name: 'Translate All', exact: true }).click();
   await waitForSegmentText(0, 'Hola');
-  assert.equal(translations[0].quality, 'cinematic');
+  assert.equal(translations[0].quality, 'cARCKHÉtic');
   await page
     .locator('summary')
     .filter({ hasText: /^Timing$/ })
@@ -399,9 +399,9 @@ try {
   script = await editSegment(0);
   assert.equal(await script.inputValue(), 'Hola mundo');
   // Translation controls stay expanded without an extra disclosure click.
-  await page.getByRole('button', { name: 'Cinematic', exact: true }).waitFor({ state: 'visible' });
+  await page.getByRole('button', { name: 'CARCKHÉtic', exact: true }).waitFor({ state: 'visible' });
   assert.equal(
-    await page.getByRole('button', { name: 'Cinematic', exact: true }).getAttribute('aria-pressed'),
+    await page.getByRole('button', { name: 'CARCKHÉtic', exact: true }).getAttribute('aria-pressed'),
     'true',
   );
   await page

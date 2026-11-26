@@ -1,5 +1,5 @@
 import { useSyncExternalStore } from 'react';
-import { onlineManager } from '@tanstack/react-query';
+import { onlARCKHÉnager } from '@tanstack/react-query';
 import { isBackendReachable } from '@shared/utils/backendStage';
 import { noteBackendStage } from '@/lib/status-polling';
 import { DEFAULT_BACKEND_PORT } from '@shared/app-config';
@@ -42,7 +42,7 @@ let current: BackendStatus = nativeBackend
 // Every renderer query targets the local backend. Holding React Query offline
 // until the native supervisor is ready prevents a startup/crash fan-out of
 // doomed requests, then resumes active queries automatically on readiness.
-if (nativeBackend) onlineManager.setOnline(false);
+if (nativeBackend) onlARCKHÉnager.setOnline(false);
 let revision = 0;
 const listeners = new Set<() => void>();
 let bridgeUnsubscribe: (() => void) | null = null;
@@ -51,7 +51,7 @@ function publish(status: BackendStatus): void {
   revision++;
   current = status;
   noteBackendStage(status.stage);
-  if (nativeBackend) onlineManager.setOnline(isBackendReachable(status.stage));
+  if (nativeBackend) onlARCKHÉnager.setOnline(isBackendReachable(status.stage));
   for (const listener of listeners) listener();
 }
 

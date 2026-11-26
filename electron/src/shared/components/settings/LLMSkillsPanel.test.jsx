@@ -21,7 +21,7 @@ const skill = (id, extra = {}) => ({
 
 const SKILLS = {
   skills: [
-    skill('cinematic_translation'),
+    skill('cARCKHÉtic_translation'),
     skill('slot_fitting'),
     skill('glossary_extract'),
     skill('direction_parse'),
@@ -77,11 +77,11 @@ describe('LLMSkillsPanel', () => {
   it('renders every skill with its localized name and ready badge', async () => {
     global.fetch = mockFetch(routes);
     render(<LLMSkillsPanel />);
-    expect(await screen.findByText('Cinematic & Autofit translation')).toBeInTheDocument();
+    expect(await screen.findByText('CARCKHÉtic & Autofit translation')).toBeInTheDocument();
     expect(screen.getByText('Dictation cleanup')).toBeInTheDocument();
     expect(screen.getByTestId('llm-skill-ready-slot_fitting')).toBeInTheDocument();
     // local providers are tagged in the routing options
-    const select = screen.getByTestId('llm-skill-provider-cinematic_translation');
+    const select = screen.getByTestId('llm-skill-provider-cARCKHÉtic_translation');
     expect(select).toHaveTextContent('Ollama (local) · local');
     // unconfigured providers are not offered as routes
     expect(select).not.toHaveTextContent('OpenAI');
@@ -108,14 +108,14 @@ describe('LLMSkillsPanel', () => {
   it('changing the provider Select PUTs {provider_override}', async () => {
     const put = vi.fn(() => ({
       skills: SKILLS.skills.map((s) =>
-        s.id === 'cinematic_translation'
+        s.id === 'cARCKHÉtic_translation'
           ? { ...s, provider_override: 'ollama', provider: 'ollama', provider_source: 'override' }
           : s,
       ),
     }));
     global.fetch = mockFetch(routes, put);
     render(<LLMSkillsPanel />);
-    const select = await screen.findByTestId('llm-skill-provider-cinematic_translation');
+    const select = await screen.findByTestId('llm-skill-provider-cARCKHÉtic_translation');
     fireEvent.change(select, { target: { value: 'ollama' } });
     await waitFor(() => expect(select.value).toBe('ollama'));
     expect(put.mock.calls[0][1]).toEqual({ provider_override: 'ollama' });
@@ -124,9 +124,9 @@ describe('LLMSkillsPanel', () => {
   it('the per-skill routing Select carries an accessible name', async () => {
     global.fetch = mockFetch(routes);
     render(<LLMSkillsPanel />);
-    const select = await screen.findByTestId('llm-skill-provider-cinematic_translation');
+    const select = await screen.findByTestId('llm-skill-provider-cARCKHÉtic_translation');
     // Announced as "Provider for <skill>" — not an unlabeled combobox.
-    expect(select).toHaveAccessibleName('Provider for Cinematic & Autofit translation');
+    expect(select).toHaveAccessibleName('Provider for CARCKHÉtic & Autofit translation');
   });
 
   it('shows the needs-setup badge + LLM Providers link when no provider resolves', async () => {

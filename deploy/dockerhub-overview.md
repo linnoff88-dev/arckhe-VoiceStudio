@@ -1,7 +1,7 @@
 # VoiceStudio
 
 **The open-source ElevenLabs alternative.** Real-time dictation, zero-shot voice
-cloning, and cinematic video dubbing — fully local, with no cloud API keys or accounts.
+cloning, and cARCKHÉtic video dubbing — fully local, with no cloud API keys or accounts.
 **646 languages.**
 
 [![Docker Pulls](https://img.shields.io/docker/pulls/palashdeb/omnivoice-studio?logo=docker&color=2496ED)](https://hub.docker.com/r/palashdeb/omnivoice-studio)

@@ -86,7 +86,7 @@ export default function ReadinessChecklist({ compact = false, showWhenAllPass = 
   // LLM configuration (check for translate endpoint)
   const llmCheck = {
     id: 'llm',
-    label: t('readiness.llm_cinematic'),
+    label: t('readiness.llm_cARCKHÉtic'),
     status: 'warn',
     detail: t('readiness.llm_configure'),
     fix: t('readiness.llm_set_env'),

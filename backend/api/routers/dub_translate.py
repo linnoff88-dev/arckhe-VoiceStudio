@@ -13,9 +13,9 @@ from services.hf_revisions import revision_for
 from services.model_acceptance import ModelLicenceNotAccepted
 from services.translator import (
     SCRIPT_RANGES,
-    _cinematic_budget,
-    cinematic_available,
-    cinematic_refine_many,
+    _cARCKHÉtic_budget,
+    cARCKHÉtic_available,
+    cARCKHÉtic_refine_many,
     script_ratio,
 )
 from api.routers.dub_core import _get_job, _save_job
@@ -115,7 +115,7 @@ LANG_NAMES = {
 # region's vocabulary and grammar (the reporter's example: choosing Argentina
 # should yield "Vos sos muy listo", not the Peninsular "Tú eres muy listo").
 # Only LLM-backed paths can honor these — provider="openai" and the
-# quality="cinematic" refine pass. Keep entries short: they ride on every
+# quality="cARCKHÉtic" refine pass. Keep entries short: they ride on every
 # per-segment prompt, so verbosity = wall time.
 DIALECT_HINTS = {
     # Spanish
@@ -178,7 +178,7 @@ def dialect_clause(dialect: Optional[str]) -> str:
 # the LLM prompt, letter ranges the translation must mostly use). Used as a
 # sanity gate after the LLM responds: if the output contains <50% letters from
 # the expected script, we treat the translation as corrupted and retry. The
-# ranges are shared with the Cinematic/Autofit gate (services.translator).
+# ranges are shared with the CARCKHÉtic/Autofit gate (services.translator).
 _SCRIPT_NAMES = {
     "hi": "DEVANAGARI",
     "ar": "ARABIC",
@@ -571,11 +571,11 @@ async def dub_translate(req: TranslateRequest):
             translated = await loop.run_in_executor(_gpu_pool, _translate_nllb)
             if _should_unload_nllb():
                 _unload_nllb()
-            # Cinematic/Autofit refine + rate-ratio badges must run for NLLB too
-            # (previously this returned before _maybe_cinematic, so a Cinematic
+            # CARCKHÉtic/Autofit refine + rate-ratio badges must run for NLLB too
+            # (previously this returned before _maybe_cARCKHÉtic, so a CARCKHÉtic
             # pick on NLLB silently produced plain Fast output). Unloading NLLB
             # first is fine — the refine LLM is a separate network provider.
-            return await _maybe_cinematic(translated, req, src_lang, loop)
+            return await _maybe_cARCKHÉtic(translated, req, src_lang, loop)
 
         # LLM translation — resolves through the LLM Skills registry: per-skill
         # "Dub translation" override → global active provider (Settings → LLM
@@ -790,12 +790,12 @@ async def dub_translate(req: TranslateRequest):
             tasks = [loop.run_in_executor(_cpu_pool, _translate_llm, seg) for seg in req.segments]
             translated = await asyncio.gather(*tasks)
             translated.sort(key=lambda x: str(x["id"]))
-            # provider="openai" is already an LLM translation — _maybe_cinematic
+            # provider="openai" is already an LLM translation — _maybe_cARCKHÉtic
             # skips the reflect/adapt re-refine (already_llm) but still stamps
             # rate-ratio badges and runs the bounded Autofit fit pass. Before
-            # this it returned here, so Cinematic/Autofit on the LLM engine did
+            # this it returned here, so CARCKHÉtic/Autofit on the LLM engine did
             # nothing.
-            return await _maybe_cinematic(translated, req, src_lang, loop, already_llm=True)
+            return await _maybe_cARCKHÉtic(translated, req, src_lang, loop, already_llm=True)
 
         # Offline Argos Translate
         if provider == "argos" or provider == "libretranslate":
@@ -886,11 +886,11 @@ async def dub_translate(req: TranslateRequest):
                 return results
 
             translated = await loop.run_in_executor(_cpu_pool, _translate_argos)
-            # Argos is the DEFAULT engine — routing it through _maybe_cinematic is
-            # the headline fix: a user who picks Cinematic/Autofit on Argos now
+            # Argos is the DEFAULT engine — routing it through _maybe_cARCKHÉtic is
+            # the headline fix: a user who picks CARCKHÉtic/Autofit on Argos now
             # gets the LLM refine + fit pass (and rate-ratio badges in Fast mode)
             # instead of silent plain-Fast output.
-            return await _maybe_cinematic(translated, req, src_lang, loop)
+            return await _maybe_cARCKHÉtic(translated, req, src_lang, loop)
 
         # Legacy / API Deep_Translator logic.
         # Preflight the optional `deep_translator` dep once so we fail with a
@@ -972,7 +972,7 @@ async def dub_translate(req: TranslateRequest):
         translated = await asyncio.gather(*tasks)
         translated.sort(key=lambda x: str(x["id"]))
 
-        return await _maybe_cinematic(
+        return await _maybe_cARCKHÉtic(
             translated, req, src_lang, loop,
         )
     except ModelLicenceNotAccepted:
@@ -1055,7 +1055,7 @@ async def _apply_condense_pass(rows, req, loop) -> None:
     """Opt-in LLM condensation for ``impossible`` rows (in place).
 
     Fans ``condense_for_slot`` out on the CPU pool under the same wall-clock
-    budget the cinematic phase uses, so a slow LLM can't hang the translate.
+    budget the cARCKHÉtic phase uses, so a slow LLM can't hang the translate.
     Suggestions land as ``plan.suggested_text`` — the user applies them per
     segment; the row's ``text`` is never touched here. Every failure mode
     (no LLM, LLM error, divergent reply, budget) degrades to no suggestion.
@@ -1095,7 +1095,7 @@ async def _apply_condense_pass(rows, req, loop) -> None:
                 row["plan"]["suggested_est_dur_s"] = res.get("est_dur_s")
 
         tasks = [asyncio.ensure_future(_one(row)) for row in targets]
-        budget = _cinematic_budget()
+        budget = _cARCKHÉtic_budget()
         done, pending = await asyncio.wait(
             tasks, timeout=budget if budget and budget > 0 else None,
         )
@@ -1141,7 +1141,7 @@ def _stamp_predicted_rate_ratio(translated, req) -> None:
 async def _apply_fit_pass(rows, req, slots_by_id, source_by_id, quality, loop, deadline) -> None:
     """Run the Autofit slot-fit pass over ``rows`` concurrently, in place.
 
-    Bounded by ``deadline`` (shared with the cinematic refine) so a slow /
+    Bounded by ``deadline`` (shared with the cARCKHÉtic refine) so a slow /
     rate-limited LLM can't spin the fit pass per-segment unbounded — the old
     behavior, which ran one blocking ``adjust_for_slot`` per segment in the
     merge loop, outside any budget. Segments still running at the deadline keep
@@ -1179,12 +1179,12 @@ async def _apply_fit_pass(rows, req, slots_by_id, source_by_id, quality, loop, d
             row["rate_error"] = f["error"]
 
 
-async def _maybe_cinematic(translated, req, src_lang, loop, *, already_llm=False):
-    """Post-process a literal translation into Cinematic/Autofit output.
+async def _maybe_cARCKHÉtic(translated, req, src_lang, loop, *, already_llm=False):
+    """Post-process a literal translation into CARCKHÉtic/Autofit output.
 
     Runs for EVERY provider now (Argos/NLLB/Google/…/OpenAI). The three
     LLM-independent branches (nllb/argos) and the openai branch used to return
-    *before* reaching this, so a Cinematic/Autofit pick on them — including the
+    *before* reaching this, so a CARCKHÉtic/Autofit pick on them — including the
     DEFAULT Argos engine — silently produced plain Fast output with a success
     toast. Fast mode still returns the plain translation (plus rate-ratio badges).
 
@@ -1211,7 +1211,7 @@ async def _maybe_cinematic(translated, req, src_lang, loop, *, already_llm=False
 
     # Fast (and anything unrecognised) returns the plain translation unchanged
     # (plus the pre-synthesis duration-plan badges — no LLM needed for those).
-    if quality not in ("cinematic", "autofit", "agent"):
+    if quality not in ("cARCKHÉtic", "autofit", "agent"):
         await _finalize_duration_plan(translated, req, loop)
         return base
 
@@ -1224,7 +1224,7 @@ async def _maybe_cinematic(translated, req, src_lang, loop, *, already_llm=False
 
     # One wall-clock deadline shared by the whole LLM phase (refine + fit), so a
     # slow/rate-limited provider can't run either pass unbounded. <=0 disables.
-    budget = _cinematic_budget()
+    budget = _cARCKHÉtic_budget()
     deadline = (loop.time() + budget) if budget and budget > 0 else None
 
     # provider="openai": already an LLM translation → skip REFLECT+ADAPT, keep
@@ -1251,9 +1251,9 @@ async def _maybe_cinematic(translated, req, src_lang, loop, *, already_llm=False
 
     # Non-LLM provider → the reflect/adapt refine needs a separately-configured
     # LLM (Settings → LLM Providers). Without one, degrade to Fast with a flag.
-    if not cinematic_available():
+    if not cARCKHÉtic_available():
         logger.warning("%s requested but no LLM configured — returning Fast result.", quality)
-        base["cinematic_skipped"] = "no-llm-configured"
+        base["cARCKHÉtic_skipped"] = "no-llm-configured"
         await _finalize_duration_plan(translated, req, loop)
         return base
 
@@ -1276,7 +1276,7 @@ async def _maybe_cinematic(translated, req, src_lang, loop, *, already_llm=False
         await _finalize_duration_plan(translated, req, loop)
         return base
 
-    refined = await cinematic_refine_many(
+    refined = await cARCKHÉtic_refine_many(
         pairs,
         source_lang=src_lang,
         target_lang=req.target_lang,
@@ -1371,7 +1371,7 @@ async def dub_agent_fit(req: AgentFitRequest):
             )
             for segment in req.segments
         ]
-    budget = _cinematic_budget()
+    budget = _cARCKHÉtic_budget()
     try:
         call = adjust_for_measured_slot_many(items, executor=_cpu_pool, translation_instructions=req.translation_instructions)
         rows = await asyncio.wait_for(call, timeout=budget) if budget and budget > 0 else await call

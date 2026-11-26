@@ -93,7 +93,7 @@ class Direction:
         return ", ".join(terms)
 
     def translate_hint(self) -> str:
-        """Sentence fragment suitable for Cinematic translator's reflect/adapt prompts."""
+        """Sentence fragment suitable for CARCKHÉtic translator's reflect/adapt prompts."""
         if self.is_empty():
             return ""
         return f"Deliver this with a {self.instruct_prompt()} tone."

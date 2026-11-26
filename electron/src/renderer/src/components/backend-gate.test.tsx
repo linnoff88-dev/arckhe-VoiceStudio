@@ -1,5 +1,5 @@
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
-import { QueryClient, QueryClientProvider, onlineManager } from '@tanstack/react-query';
+import { QueryClient, QueryClientProvider, onlARCKHÉnager } from '@tanstack/react-query';
 import { beforeEach, expect, it, vi } from 'vitest';
 import i18n from '@/i18n';
 import type { BackendStatus } from '../../../preload/index.d';
@@ -33,7 +33,7 @@ vi.mock('./bridge', () => ({
 
 beforeEach(() => {
   bridgeStub.current = null;
-  onlineManager.setOnline(true);
+  onlARCKHÉnager.setOnline(true);
   backendStatus.stage = 'setup_required';
   backendStatus.elapsedMs = 0;
   backendStatus.logTail = [];
@@ -278,7 +278,7 @@ it('shows a populated, usable reconnect form for an expired remote session while
   backendStatus.remote = true;
   // A failed backend takes React Query offline (use-backend-status); the saved
   // URL must still load because it comes from IPC, not the network.
-  onlineManager.setOnline(false);
+  onlARCKHÉnager.setOnline(false);
   bridgeStub.current = {
     backend: {
       getConnection: async () => ({

@@ -475,9 +475,9 @@ async def test_google_rejects_http_200_error_page(monkeypatch):
     assert seg['error'] == 'translation provider returned invalid output'
 
 
-# ── P0: Cinematic/Autofit must run on the non-deep_translator engines ────────
+# ── P0: CARCKHÉtic/Autofit must run on the non-deep_translator engines ────────
 # Before this fix the argos/nllb/openai branches returned BEFORE
-# _maybe_cinematic, so picking Cinematic/Autofit on the DEFAULT Argos engine
+# _maybe_cARCKHÉtic, so picking CARCKHÉtic/Autofit on the DEFAULT Argos engine
 # silently produced plain Fast output (no quality_used/refine/rate badges).
 
 
@@ -507,9 +507,9 @@ def _install_fake_argos(monkeypatch):
 
 
 @pytest.mark.asyncio
-async def test_argos_cinematic_refines_with_llm(monkeypatch):
-    """DEFAULT engine + Cinematic + a usable LLM → refine actually runs and the
-    response carries quality_used=='cinematic' plus the literal/critique fields."""
+async def test_argos_cARCKHÉtic_refines_with_llm(monkeypatch):
+    """DEFAULT engine + CARCKHÉtic + a usable LLM → refine actually runs and the
+    response carries quality_used=='cARCKHÉtic' plus the literal/critique fields."""
     from api.routers import dub_translate
     from schemas.requests import TranslateRequest, TranslateSegment
     _install_fake_argos(monkeypatch)
@@ -520,15 +520,15 @@ async def test_argos_cinematic_refines_with_llm(monkeypatch):
             for sid, _src, lit in pairs
         ]
 
-    monkeypatch.setattr(dub_translate, "cinematic_available", lambda: True)
-    monkeypatch.setattr(dub_translate, "cinematic_refine_many", fake_refine_many)
+    monkeypatch.setattr(dub_translate, "cARCKHÉtic_available", lambda: True)
+    monkeypatch.setattr(dub_translate, "cARCKHÉtic_refine_many", fake_refine_many)
 
     req = TranslateRequest(
         segments=[TranslateSegment(id="s1", text="Hello")],
-        target_lang="es", provider="argos", source_lang="en", quality="cinematic",
+        target_lang="es", provider="argos", source_lang="en", quality="cARCKHÉtic",
     )
     resp = await dub_translate.dub_translate(req)
-    assert resp["quality_used"] == "cinematic"
+    assert resp["quality_used"] == "cARCKHÉtic"
     row = resp["translated"][0]
     assert row["literal"] == "[es]Hello"      # the argos literal is preserved
     assert row["text"] == "CINE:[es]Hello"    # and it was actually refined
@@ -536,20 +536,20 @@ async def test_argos_cinematic_refines_with_llm(monkeypatch):
 
 
 @pytest.mark.asyncio
-async def test_argos_cinematic_skipped_without_llm(monkeypatch):
-    """DEFAULT engine + Cinematic + NO LLM → degrades to Fast with an explicit
-    cinematic_skipped flag (not a silent success)."""
+async def test_argos_cARCKHÉtic_skipped_without_llm(monkeypatch):
+    """DEFAULT engine + CARCKHÉtic + NO LLM → degrades to Fast with an explicit
+    cARCKHÉtic_skipped flag (not a silent success)."""
     from api.routers import dub_translate
     from schemas.requests import TranslateRequest, TranslateSegment
     _install_fake_argos(monkeypatch)
-    monkeypatch.setattr(dub_translate, "cinematic_available", lambda: False)
+    monkeypatch.setattr(dub_translate, "cARCKHÉtic_available", lambda: False)
 
     req = TranslateRequest(
         segments=[TranslateSegment(id="s1", text="Hello")],
-        target_lang="es", provider="argos", source_lang="en", quality="cinematic",
+        target_lang="es", provider="argos", source_lang="en", quality="cARCKHÉtic",
     )
     resp = await dub_translate.dub_translate(req)
-    assert resp["cinematic_skipped"] == "no-llm-configured"
+    assert resp["cARCKHÉtic_skipped"] == "no-llm-configured"
     assert resp["quality_used"] == "fast"
     assert resp["translated"][0]["text"] == "[es]Hello"  # literal kept
 
@@ -557,7 +557,7 @@ async def test_argos_cinematic_skipped_without_llm(monkeypatch):
 @pytest.mark.asyncio
 async def test_argos_fast_stamps_rate_ratio(monkeypatch):
     """Fast on the DEFAULT engine still reaches the rate-ratio stamping so the
-    UI's seg-rate-badge has data (it used to return before _maybe_cinematic)."""
+    UI's seg-rate-badge has data (it used to return before _maybe_cARCKHÉtic)."""
     from api.routers import dub_translate
     from schemas.requests import TranslateRequest, TranslateSegment
     _install_fake_argos(monkeypatch)
@@ -609,7 +609,7 @@ def _install_fake_openai(monkeypatch, *, content="hola mundo", raises=None):
     return calls
 
 
-# ── P1: the Autofit fit pass must be bounded by the cinematic wall-clock ─────
+# ── P1: the Autofit fit pass must be bounded by the cARCKHÉtic wall-clock ─────
 
 
 @pytest.mark.asyncio
@@ -711,7 +711,7 @@ async def test_openai_autofit_fit_pass_is_budget_bounded(monkeypatch):
     from services import speech_rate
     _install_fake_openai(monkeypatch, content="hola mundo")
 
-    monkeypatch.setenv("OMNIVOICE_CINEMATIC_BUDGET_S", "0.3")
+    monkeypatch.setenv("OMNIVOICE_CARCKHÉTIC_BUDGET_S", "0.3")
 
     def _slow_fit(text, *, slot_seconds, target_lang, source_text=None, strict=False):
         time.sleep(3.0)  # far over the 0.3s budget

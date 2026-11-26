@@ -628,7 +628,7 @@ it('does not generate-ready an Agent Fit translation that fell back without an L
     .mockClear()
     .mockResolvedValueOnce([])
     .mockResolvedValueOnce({
-      cinematic_skipped: 'no-llm-configured',
+      cARCKHÉtic_skipped: 'no-llm-configured',
       translated: [{ id: '1', text: 'Hola' }],
     });
 
@@ -766,7 +766,7 @@ it('resetDubSession drops the loaded source but keeps production preferences', (
     ],
     error: 'boom',
     target: 'French',
-    quality: 'cinematic',
+    quality: 'cARCKHÉtic',
   }));
   resetDubSession();
   expect(dubSession.state.jobId).toBeNull();
@@ -775,7 +775,7 @@ it('resetDubSession drops the loaded source but keeps production preferences', (
   expect(dubSession.state.phase).toBe('idle');
   expect(dubSession.state.error).toBeNull();
   expect(dubSession.state.target).toBe('French');
-  expect(dubSession.state.quality).toBe('cinematic');
+  expect(dubSession.state.quality).toBe('cARCKHÉtic');
 });
 
 it('cancelDub exposes cancel-in-flight state so removal stays disabled', async () => {

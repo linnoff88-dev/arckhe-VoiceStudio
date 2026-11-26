@@ -59,8 +59,8 @@ it('rejects malformed drafts, unsafe IDs and invalid timings', () => {
 
 it('preserves translation quality and rejects unknown stored modes', () => {
   expect(
-    restoreDubDraft(JSON.stringify({ ...defaults, quality: 'cinematic' }), defaults).quality,
-  ).toBe('cinematic');
+    restoreDubDraft(JSON.stringify({ ...defaults, quality: 'cARCKHÉtic' }), defaults).quality,
+  ).toBe('cARCKHÉtic');
   expect(
     restoreDubDraft(JSON.stringify({ ...defaults, quality: 'invalid' }), defaults).quality,
   ).toBe('fast');

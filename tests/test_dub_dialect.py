@@ -1,7 +1,7 @@
 """Tests for the regional-dialect translation hint (#280, item 2).
 
 The dialect rides on LLM-backed translation paths only (provider="openai"
-and the quality="cinematic" refine). Non-LLM providers can't honor it and
+and the quality="cARCKHÉtic" refine). Non-LLM providers can't honor it and
 the response says so via `dialect_applied: false`.
 """
 from __future__ import annotations
@@ -80,10 +80,10 @@ def test_dialect_flags_present_when_requested():
     assert _dialect_flags(req, applied=False) == {"dialect": "es-AR", "dialect_applied": False}
 
 
-# ── cinematic prompt threading ──────────────────────────────────────────────
+# ── cARCKHÉtic prompt threading ──────────────────────────────────────────────
 
 
-def test_cinematic_refine_sync_injects_dialect_into_prompts(monkeypatch):
+def test_cARCKHÉtic_refine_sync_injects_dialect_into_prompts(monkeypatch):
     from services import translator
 
     captured_systems = []
@@ -98,7 +98,7 @@ def test_cinematic_refine_sync_injects_dialect_into_prompts(monkeypatch):
     monkeypatch.setattr(translator, "_llm_client", lambda: object())
     monkeypatch.setattr(translator, "_chat", fake_chat)
 
-    res = translator.cinematic_refine_sync(
+    res = translator.cARCKHÉtic_refine_sync(
         "You are very clever",
         "tú eres muy listo",
         source_lang="en",
@@ -112,7 +112,7 @@ def test_cinematic_refine_sync_injects_dialect_into_prompts(monkeypatch):
         assert "Dialect: Rioplatense Spanish (Argentina): use voseo." in sys_prompt
 
 
-def test_cinematic_refine_sync_no_dialect_keeps_prompts_clean(monkeypatch):
+def test_cARCKHÉtic_refine_sync_no_dialect_keeps_prompts_clean(monkeypatch):
     from services import translator
 
     captured_systems = []
@@ -124,13 +124,13 @@ def test_cinematic_refine_sync_no_dialect_keeps_prompts_clean(monkeypatch):
     monkeypatch.setattr(translator, "_llm_client", lambda: object())
     monkeypatch.setattr(translator, "_chat", fake_chat)
 
-    translator.cinematic_refine_sync(
+    translator.cARCKHÉtic_refine_sync(
         "hello", "hola", source_lang="en", target_lang="es",
     )
     assert all("Dialect:" not in s for s in captured_systems)
 
 
-# ── response shape via _maybe_cinematic ─────────────────────────────────────
+# ── response shape via _maybe_cARCKHÉtic ─────────────────────────────────────
 
 
 def test_fast_quality_reports_dialect_not_applied():
@@ -144,7 +144,7 @@ def test_fast_quality_reports_dialect_not_applied():
         req = TranslateRequest(
             segments=[], target_lang="es", quality="fast", dialect="es-AR",
         )
-        return await dub_translate._maybe_cinematic(
+        return await dub_translate._maybe_cARCKHÉtic(
             [], req, "en", asyncio.get_running_loop(),
         )
 
@@ -153,7 +153,7 @@ def test_fast_quality_reports_dialect_not_applied():
     assert res["dialect_applied"] is False
 
 
-def test_cinematic_quality_reports_dialect_applied(monkeypatch):
+def test_cARCKHÉtic_quality_reports_dialect_applied(monkeypatch):
     import asyncio
     from api.routers import dub_translate
     from schemas.requests import TranslateRequest, TranslateSegment
@@ -167,16 +167,16 @@ def test_cinematic_quality_reports_dialect_applied(monkeypatch):
             for sid, _src, lit in pairs
         ]
 
-    monkeypatch.setattr(dub_translate, "cinematic_available", lambda: True)
-    monkeypatch.setattr(dub_translate, "cinematic_refine_many", fake_refine_many)
+    monkeypatch.setattr(dub_translate, "cARCKHÉtic_available", lambda: True)
+    monkeypatch.setattr(dub_translate, "cARCKHÉtic_refine_many", fake_refine_many)
 
     async def _run():
         req = TranslateRequest(
             segments=[TranslateSegment(id="s1", text="You are very clever")],
-            target_lang="es", quality="cinematic", dialect="es-AR",
+            target_lang="es", quality="cARCKHÉtic", dialect="es-AR",
         )
         translated = [{"id": "s1", "text": "tú eres muy listo"}]
-        return await dub_translate._maybe_cinematic(
+        return await dub_translate._maybe_cARCKHÉtic(
             translated, req, "en", asyncio.get_running_loop(),
         )
 
@@ -186,7 +186,7 @@ def test_cinematic_quality_reports_dialect_applied(monkeypatch):
     assert res["translated"][0]["text"] == "vos sos muy listo"
 
 
-def test_cinematic_ignores_dialect_from_other_language(monkeypatch):
+def test_cARCKHÉtic_ignores_dialect_from_other_language(monkeypatch):
     """A leftover es-AR dialect must not contaminate a French translation."""
     import asyncio
     from api.routers import dub_translate
@@ -201,15 +201,15 @@ def test_cinematic_ignores_dialect_from_other_language(monkeypatch):
             for sid, _src, lit in pairs
         ]
 
-    monkeypatch.setattr(dub_translate, "cinematic_available", lambda: True)
-    monkeypatch.setattr(dub_translate, "cinematic_refine_many", fake_refine_many)
+    monkeypatch.setattr(dub_translate, "cARCKHÉtic_available", lambda: True)
+    monkeypatch.setattr(dub_translate, "cARCKHÉtic_refine_many", fake_refine_many)
 
     async def _run():
         req = TranslateRequest(
             segments=[TranslateSegment(id="s1", text="hello")],
-            target_lang="fr", quality="cinematic", dialect="es-AR",
+            target_lang="fr", quality="cARCKHÉtic", dialect="es-AR",
         )
-        return await dub_translate._maybe_cinematic(
+        return await dub_translate._maybe_cARCKHÉtic(
             [{"id": "s1", "text": "bonjour"}], req, "en",
             asyncio.get_running_loop(),
         )

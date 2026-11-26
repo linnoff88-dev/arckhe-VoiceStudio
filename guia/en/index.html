@@ -5,9 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>VoiceStudio — local voice, dubbing and transcription</title>
 <meta name="description" content="VoiceStudio guide: an open, local alternative to ElevenLabs to clone voices, create a voice from a description, dub video and transcribe in 646 languages, with an API and MCP for agents.">
-<link rel="alternate" hreflang="pt-BR" href="https://inematds.github.io/VoiceStudio/guia/">
-<link rel="alternate" hreflang="en" href="https://inematds.github.io/VoiceStudio/guia/en/">
-<link rel="alternate" hreflang="es" href="https://inematds.github.io/VoiceStudio/guia/es/">
+<link rel="alternate" hreflang="pt-BR" href="https://linnoff88-dev.github.io/arckhe-/guia/">
+<link rel="alternate" hreflang="en" href="https://linnoff88-dev.github.io/arckhe-/guia/en/">
+<link rel="alternate" hreflang="es" href="https://linnoff88-dev.github.io/arckhe-/guia/es/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
@@ -39,8 +39,8 @@
   nav .brand{display:flex;align-items:center;gap:8px;font-family:Sora;font-weight:800;letter-spacing:-.02em;color:var(--amb)}
   nav .brand .emoji{font-size:1.25rem}
   nav .sep{color:var(--mut);opacity:.45}
-  nav .inema{color:var(--sky);font-weight:600;font-size:.88rem;font-family:Sora}
-  nav .inema:hover{filter:brightness(1.15)}
+  nav .ARCKHÉ{color:var(--sky);font-weight:600;font-size:.88rem;font-family:Sora}
+  nav .ARCKHÉ:hover{filter:brightness(1.15)}
   nav .pro{color:var(--pro);font-weight:600;font-size:.88rem;font-family:Sora}
   nav .pro:hover{filter:brightness(1.15)}
   nav .clubpro{display:inline-flex;align-items:center;gap:6px}
@@ -107,18 +107,18 @@
   <a class="brand" href="#top"><span class="emoji">🎙️</span> VoiceStudio</a>
   <span class="sep">|</span>
   <span class="clubpro">
-    <a class="inema" href="https://inema.club" target="_blank" rel="noopener">INEMA.CLUB</a>
+    <a class="ARCKHÉ" href="https://ARCKHÉ AI" target="_blank" rel="noopener">ARCKHÉ AI</a>
     <span class="sep">-</span>
-    <a class="pro" href="https://inema.pro" target="_blank" rel="noopener">PRO</a>
+    <a class="pro" href="https://ARCKHÉ.pro" target="_blank" rel="noopener">PRO</a>
   </span>
   <div class="links">
     <a class="sec" href="#oque">What it is</a>
     <a class="sec" href="#fluxo">How it works</a>
     <a class="sec" href="#guia">User guide</a>
-    <a class="sec" href="#inema">At INEMA</a>
+    <a class="sec" href="#ARCKHÉ">At ARCKHÉ</a>
     <span class="lang"><a href="../">PT</a><a class="on" href="./">EN</a><a href="../es/">ES</a></span>
     <button class="tgl" id="themeToggle" aria-label="Toggle theme" title="Toggle theme">🌙</button>
-    <a class="btn" href="https://github.com/inematds/VoiceStudio" target="_blank" rel="noopener">GitHub</a>
+    <a class="btn" href="https://github.com/linnoff88-dev/VoiceStudio" target="_blank" rel="noopener">GitHub</a>
   </div>
 </div></nav>
 
@@ -131,7 +131,7 @@
       <p class="lead">Voice cloning, voice from a description, dubbing and transcription in 646 languages, on your own machine and with no per-minute fees.</p>
       <div class="cta">
         <a class="btn" href="#guia">Start the guide</a>
-        <a class="btn ghost" href="https://github.com/inematds/VoiceStudio" target="_blank" rel="noopener">View on GitHub</a>
+        <a class="btn ghost" href="https://github.com/linnoff88-dev/VoiceStudio" target="_blank" rel="noopener">View on GitHub</a>
       </div>
     </div>
     <figure><img src="../assets/banner-en.jpg" alt="VoiceStudio banner: your local voice — cloning, dubbing and transcription without the cloud"></figure>
@@ -154,7 +154,7 @@
 <section id="oque"><div class="wrap">
   <span class="chip">What it is</span>
   <h2>A complete voice studio, no cloud</h2>
-  <p class="sub">A project by <a href="https://github.com/debpalash/VoiceStudio" target="_blank" rel="noopener">debpalash/VoiceStudio</a> (AGPL-3.0 license), mirrored by INEMA with this guide. Everything runs on your hardware; remote services are optional.</p>
+  <p class="sub">A project by <a href="https://github.com/debpalash/VoiceStudio" target="_blank" rel="noopener">debpalash/VoiceStudio</a> (AGPL-3.0 license), mirrored by ARCKHÉ with this guide. Everything runs on your hardware; remote services are optional.</p>
   <figure style="margin:0 0 26px;border-radius:16px;overflow:hidden;border:1px solid var(--line);box-shadow:0 30px 80px -30px #000"><img src="../assets/banner-grade-en.jpg" alt="VoiceStudio features: voice cloning, video dubbing, voice from a description, transcription, 646 languages, local API and MCP" loading="lazy" style="width:100%;display:block"></figure>
   <div class="grid g3">
     <div class="card"><h3>🎙️ Clones and creates voices</h3><p>A clean recording of a few seconds becomes a reusable voice. Or describe the voice ("female, deep, documentary tone") and it builds a new one.</p></div>
@@ -211,7 +211,7 @@
   <div class="step"><div class="b">2</div><div>
     <h3>Or run from the source code</h3>
     <p>This is the path on Linux ARM64 and for anyone who wants the newest version. <code>setup:api</code> prepares Python; <code>dev</code> opens the app and starts the backend.</p>
-<pre><span class="k">git clone</span> https://github.com/inematds/VoiceStudio.git
+<pre><span class="k">git clone</span> https://github.com/linnoff88-dev/VoiceStudio.git
 <span class="k">cd</span> VoiceStudio
 <span class="k">bun install</span>
 <span class="k">bun run</span> setup:api   <span class="c"># Python environment with uv</span>
@@ -250,13 +250,13 @@ http_headers = { <span class="s">"X-OmniVoice-Client-Id"</span> = <span class="s
   </div></div>
 </div></section>
 
-<section id="inema"><div class="wrap">
-  <span class="chip">At INEMA</span>
+<section id="ARCKHÉ"><div class="wrap">
+  <span class="chip">At ARCKHÉ</span>
   <h2>What it adds to what we already use</h2>
-  <p class="sub">Comparison with our voice chain (inemavox with chatterbox, Whisper and dubbing; avatar through the HeyGen studio).</p>
+  <p class="sub">Comparison with our voice chain (ARCKHÉvox with chatterbox, Whisper and dubbing; avatar through the HeyGen studio).</p>
   <div class="tblwrap"><table class="tbl">
-    <tr><th>Function</th><th>Today at INEMA</th><th>VoiceStudio</th></tr>
-    <tr><td>Download</td><td>inemavox (yt-dlp)</td><td>yt-dlp as well: nothing new</td></tr>
+    <tr><th>Function</th><th>Today at ARCKHÉ</th><th>VoiceStudio</th></tr>
+    <tr><td>Download</td><td>ARCKHÉvox (yt-dlp)</td><td>yt-dlp as well: nothing new</td></tr>
     <tr><td>Transcription</td><td>Whisper large-v3 / Parakeet</td><td>Equivalent (WhisperX, Parakeet)</td></tr>
     <tr><td>Voice cloning</td><td>chatterbox (voices nei, rachel)</td><td>17 engines, including OmniVoice, CosyVoice 3 and IndexTTS 2.5</td></tr>
     <tr><td>EN/ES voice without an avatar</td><td>Depends on the HeyGen studio</td><td>Multilingual engines with cloning</td></tr>
@@ -272,15 +272,15 @@ http_headers = { <span class="s">"X-OmniVoice-Client-Id"</span> = <span class="s
   <p class="sub">The mirror and this guide are published; the hands-on test has not been done yet.</p>
   <div class="phase"><div class="tag">Pilot</div><div class="d"><strong>Install only the backend on ARM64</strong><span>From the source code, with a memory cap and local-only access.</span></div></div>
   <div class="phase"><div class="tag">Test</div><div class="d"><strong>Same text, three engines</strong><span>OmniVoice, IndexTTS 2.5 and CosyVoice 3 against chatterbox, with the same reference voice, checked by transcription and by ear.</span></div></div>
-  <div class="phase"><div class="tag">Decision</div><div class="d"><strong>Become an inemavox engine</strong><span>If any engine wins, it joins inemavox as a new option, with no parallel system.</span></div></div>
+  <div class="phase"><div class="tag">Decision</div><div class="d"><strong>Become an ARCKHÉvox engine</strong><span>If any engine wins, it joins ARCKHÉvox as a new option, with no parallel system.</span></div></div>
 </div></section>
 
 <footer>
   <div class="wrap">
     <div class="pill">Python</div><div class="pill">Electron</div><div class="pill">AGPL-3.0</div>
-    <p style="margin-top:18px">VoiceStudio · created by <a href="https://github.com/debpalash/VoiceStudio">debpalash</a>, INEMA guide ·
-      <a href="https://github.com/inematds/VoiceStudio">inematds/VoiceStudio</a> ·
-      <a href="https://inema.club">INEMA.CLUB</a></p>
+    <p style="margin-top:18px">VoiceStudio · created by <a href="https://github.com/debpalash/VoiceStudio">debpalash</a>, ARCKHÉ guide ·
+      <a href="https://github.com/linnoff88-dev/VoiceStudio">linnoff88-dev/VoiceStudio</a> ·
+      <a href="https://ARCKHÉ AI">ARCKHÉ AI</a></p>
   </div>
 </footer>
 

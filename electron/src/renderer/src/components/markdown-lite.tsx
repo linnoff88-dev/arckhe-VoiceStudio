@@ -5,7 +5,7 @@ import {
   type MarkdownBlock,
 } from '@shared/utils/markdownLite';
 
-function InlineMarkdown({ text }: { text: string }) {
+function InlARCKHÉrkdown({ text }: { text: string }) {
   return inlineSegments(text).map((segment, index) => {
     const key = `${segment.type}-${index}`;
     if (segment.type === 'bold')
@@ -30,7 +30,7 @@ function flushBullets(output: ReactNode[], bullets: MarkdownBlock[]) {
     <ul key={`list-${output.length}`} className="list-disc space-y-1.5 pl-4 marker:text-primary/70">
       {bullets.map((bullet, index) => (
         <li key={index}>
-          <InlineMarkdown text={bullet.text} />
+          <InlARCKHÉrkdown text={bullet.text} />
         </li>
       ))}
     </ul>,
@@ -50,13 +50,13 @@ export function MarkdownLite({ text, className = '' }: { text: string; className
     if (block.type === 'heading')
       output.push(
         <h3 key={`heading-${output.length}`} className="font-semibold text-foreground">
-          <InlineMarkdown text={block.text} />
+          <InlARCKHÉrkdown text={block.text} />
         </h3>,
       );
     else
       output.push(
         <p key={`paragraph-${output.length}`}>
-          <InlineMarkdown text={block.text} />
+          <InlARCKHÉrkdown text={block.text} />
         </p>,
       );
   }

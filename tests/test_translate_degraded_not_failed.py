@@ -1,6 +1,6 @@
 """Degraded ≠ failed: a skipped polish pass must not disable downstream passes.
 
-The cinematic reflect/adapt chain is optional polish — on any failure (rate
+The cARCKHÉtic reflect/adapt chain is optional polish — on any failure (rate
 limit, budget, divergent reply, no LLM) the segment keeps its literal
 translation and is fully usable. Those degradations used to be reported under
 the same ``error`` key as real translation failures, which had three
@@ -57,7 +57,7 @@ def test_degraded_rows_still_get_duration_plan():
         target_lang="bn",
     )
     rows = [
-        {"id": "1", "text": "একটি অনুবাদিত লাইন", "degraded": "cinematic-budget"},
+        {"id": "1", "text": "একটি অনুবাদিত লাইন", "degraded": "cARCKHÉtic-budget"},
         {"id": "2", "text": "another line", "error": "llm-failed"},
     ]
     _stamp_duration_plan(rows, req)

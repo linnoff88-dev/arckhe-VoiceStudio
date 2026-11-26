@@ -1,5 +1,5 @@
 """
-Cinematic translation pipeline — Phase 1.1 (ROADMAP.md).
+CARCKHÉtic translation pipeline — Phase 1.1 (ROADMAP.md).
 
 Takes the literal translation of a segment (from any provider — Argos, Google,
 NLLB, OpenAI, …) and runs it through a 3-step LLM chain:
@@ -7,7 +7,7 @@ NLLB, OpenAI, …) and runs it through a 3-step LLM chain:
     1. LITERAL    — already done by the provider caller; passed in as input.
     2. REFLECT    — LLM critiques the literal against tone, idiom, length,
                     pacing, and any project glossary.
-    3. ADAPT      — LLM rewrites for cinematic delivery using the critique.
+    3. ADAPT      — LLM rewrites for cARCKHÉtic delivery using the critique.
 
 Output contract per segment:
 
@@ -20,7 +20,7 @@ Output contract per segment:
 
 Graceful degradation: if the LLM is unreachable / unconfigured, each segment
 falls back to the literal text with a `translate_error` marker so the UI can
-surface "Cinematic unavailable — showing Fast result for N segments".
+surface "CARCKHÉtic unavailable — showing Fast result for N segments".
 
 The reflect + adapt calls go through an OpenAI-compatible client, configurable
 via env:
@@ -58,7 +58,7 @@ crisp sentences, focusing on:
 Reply ONLY with the critique — no headers, no bullet points, no code fences."""
 
 _ADAPT_PROMPT = """\
-You are a cinematic dubbing writer. Rewrite the literal translation using the
+You are a cARCKHÉtic dubbing writer. Rewrite the literal translation using the
 editor's critique so it sounds natural, in-character, and fits the speaker's
 time slot. Keep meaning faithful but prefer native idiom over word-for-word
 accuracy. Never introduce facts, names, or dialogue that are not present in
@@ -88,7 +88,7 @@ _KANA_RANGES = (
 
 # Letters each distinctive-script target may be written in. The single source
 # for the primary translation gate (dub_translate.LANG_REQUIRED_SCRIPT) and the
-# Cinematic/Autofit refine gate below. Japanese is written in kana AND kanji;
+# CARCKHÉtic/Autofit refine gate below. Japanese is written in kana AND kanji;
 # counting kana alone rejected every kanji-heavy Japanese line (#2576).
 SCRIPT_RANGES: dict[str, tuple[tuple[int, int], ...]] = {
     "hi":    ((0x0900, 0x097F),),
@@ -150,7 +150,7 @@ _SHORT_REF_ABS_SLACK = 120   # …use an absolute cap instead: ref + this many c
 def _refine_ratio_bounds() -> tuple[float, float]:
     """Accepted ``len(candidate)/len(reference)`` window for LLM refine output.
     Anything outside is treated as divergence and the caller degrades to its
-    input text. Defaults [0.4, 2.5]; env-tunable like the cinematic budget."""
+    input text. Defaults [0.4, 2.5]; env-tunable like the cARCKHÉtic budget."""
     try:
         lo = float(os.environ.get("OMNIVOICE_REFINE_RATIO_MIN", "0.4"))
     except ValueError:
@@ -200,7 +200,7 @@ def refine_output_ok(
 ) -> tuple[bool, str | None]:
     """Sanity-check one LLM refine output against the text it was rewriting.
 
-    Shared by the Cinematic ADAPT step here and by ``speech_rate``'s Autofit
+    Shared by the CARCKHÉtic ADAPT step here and by ``speech_rate``'s Autofit
     fit pass (speech_rate imports this; translator never imports speech_rate,
     so there is no cycle). Returns ``(ok, reason)`` — ``reason`` is ``None``
     when ok, otherwise a short machine-readable tag for logs/error mapping.
@@ -238,13 +238,13 @@ def refine_output_ok(
 
 
 # The LLM Skills registry entry this pipeline resolves through — lets the
-# user disable Cinematic/Autofit's LLM use or route it to a specific provider
+# user disable CARCKHÉtic/Autofit's LLM use or route it to a specific provider
 # (Settings → LLM Skills) independently of the other LLM features.
-_SKILL_ID = "cinematic_translation"
+_SKILL_ID = "cARCKHÉtic_translation"
 
 
 def _llm_client():
-    """Lazy-build the OpenAI-compatible client for the Cinematic skill.
+    """Lazy-build the OpenAI-compatible client for the CARCKHÉtic skill.
 
     Resolves through the LLM Skills registry: per-skill provider override →
     global active provider (Settings → LLM Providers). The registry's
@@ -254,8 +254,8 @@ def _llm_client():
 
     The registry builds the client with ``max_retries=0`` (see
     ``llm_skills.resolve_skill_client``) so a 429 + long Retry-After can't make
-    one call sleep+retry past the cinematic wall-clock budget from inside a
-    single request. The pass-level budget (``cinematic_refine_many``) and the
+    one call sleep+retry past the cARCKHÉtic wall-clock budget from inside a
+    single request. The pass-level budget (``cARCKHÉtic_refine_many``) and the
     per-call timeout stay the only bounds.
     """
     from services import llm_skills
@@ -278,12 +278,12 @@ def _llm_timeout() -> float:
         return 45.0
 
 
-def _cinematic_budget() -> float:
-    """Overall wall-clock cap for a whole cinematic/autofit refine pass (seconds).
+def _cARCKHÉtic_budget() -> float:
+    """Overall wall-clock cap for a whole cARCKHÉtic/autofit refine pass (seconds).
     Unfinished segments degrade to their literal (Fast) translation once hit, so
     a slow provider can't hang the translate. Default 180s; <=0 disables."""
     try:
-        return float(os.environ.get("OMNIVOICE_CINEMATIC_BUDGET_S", "180"))
+        return float(os.environ.get("OMNIVOICE_CARCKHÉTIC_BUDGET_S", "180"))
     except ValueError:
         return 180.0
 
@@ -375,12 +375,12 @@ def _chat(client, *, system: str, user: str) -> str:
 # ── Public API ──────────────────────────────────────────────────────────────
 
 
-def cinematic_available() -> bool:
+def cARCKHÉtic_available() -> bool:
     """Cheap check so callers can warn early rather than after a full translate run."""
     return _llm_client() is not None
 
 
-def cinematic_refine_sync(
+def cARCKHÉtic_refine_sync(
     source_text: str,
     literal_text: str,
     *,
@@ -444,7 +444,7 @@ def cinematic_refine_sync(
         )
         critique = _chat(client, system=_with_preamble(_REFLECT_PROMPT), user=reflect_user)
     except Exception as e:
-        logger.warning("cinematic reflect failed: %s", e)
+        logger.warning("cARCKHÉtic reflect failed: %s", e)
         return {**result_ok, "degraded": f"reflect: {e}"}
 
     # Step 3 — adapt
@@ -456,7 +456,7 @@ def cinematic_refine_sync(
         )
         adapted = _chat(client, system=_with_preamble(_ADAPT_PROMPT), user=adapt_user)
     except Exception as e:
-        logger.warning("cinematic adapt failed: %s", e)
+        logger.warning("cARCKHÉtic adapt failed: %s", e)
         return {
             "text": literal_text,
             "literal": literal_text,
@@ -476,7 +476,7 @@ def cinematic_refine_sync(
         ok, reason = refine_output_ok(literal_text, final, target_lang, critique=critique)
         if not ok:
             logger.warning(
-                "cinematic adapt diverged for %s (%s) — falling back to literal",
+                "cARCKHÉtic adapt diverged for %s (%s) — falling back to literal",
                 target_lang, reason,
             )
             wrong_script = (reason or "").startswith("wrong-script")
@@ -494,7 +494,7 @@ def cinematic_refine_sync(
     }
 
 
-async def cinematic_refine_many(
+async def cARCKHÉtic_refine_many(
     pairs: list[tuple],
     *,
     source_lang: str,
@@ -526,7 +526,7 @@ async def cinematic_refine_many(
         async with sem:
             res = await loop.run_in_executor(
                 executor,
-                lambda: cinematic_refine_sync(
+                lambda: cARCKHÉtic_refine_sync(
                     src, lit,
                     source_lang=source_lang,
                     target_lang=target_lang,
@@ -540,10 +540,10 @@ async def cinematic_refine_many(
     # Overall wall-clock budget for the whole pass. Per-call timeout + bounded
     # concurrency already cap it, but a slow/rate-limited provider on a large dub
     # can still stall the "Translating…" spinner for minutes. Bound it: segments
-    # that finish in time keep their cinematic refine; any still-running segment
+    # that finish in time keep their cARCKHÉtic refine; any still-running segment
     # degrades to its literal (Fast) translation so the translate ALWAYS returns
     # within the budget instead of hanging. 0/negative disables the bound.
-    budget = _cinematic_budget()
+    budget = _cARCKHÉtic_budget()
     tasks = [asyncio.ensure_future(_one(sid, src, lit)) for sid, src, lit in pairs]
     if budget <= 0:
         return await asyncio.gather(*tasks)
@@ -551,9 +551,9 @@ async def cinematic_refine_many(
     done, pending = await asyncio.wait(tasks, timeout=budget)
     if pending:
         logger.warning(
-            "Cinematic pass hit its %.0fs budget with %d/%d segment(s) unfinished "
+            "CARCKHÉtic pass hit its %.0fs budget with %d/%d segment(s) unfinished "
             "— falling back to the literal translation for those (slow LLM "
-            "provider?). Raise OMNIVOICE_CINEMATIC_BUDGET_S or pick a faster "
+            "provider?). Raise OMNIVOICE_CARCKHÉTIC_BUDGET_S or pick a faster "
             "provider.", budget, len(pending), len(tasks),
         )
     out: list[dict] = []
@@ -563,7 +563,7 @@ async def cinematic_refine_many(
                 out.append(task.result())
                 continue
             except Exception as e:  # noqa: BLE001 — never let one seg sink the pass
-                logger.warning("cinematic segment %s failed: %s", sid, e)
+                logger.warning("cARCKHÉtic segment %s failed: %s", sid, e)
         else:
             task.cancel()  # stop awaiting; the executor thread is abandoned (#730 pattern)
         # "degraded", not "error": the literal translation is used, so the
@@ -572,5 +572,5 @@ async def cinematic_refine_many(
         # it as a failed segment. `error` is reserved for rows with no usable
         # text at all (the base translation itself failed).
         out.append({"id": sid, "text": lit, "literal": lit, "critique": "",
-                    "degraded": "cinematic-budget"})
+                    "degraded": "cARCKHÉtic-budget"})
     return out

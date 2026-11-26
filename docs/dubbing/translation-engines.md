@@ -100,22 +100,22 @@ that opens a small popover with everything you need:
 never leave your machine. Reach for the online engines only from a from-source
 install where you can add their package.
 
-## Translation quality: Fast, Autofit, Cinematic
+## Translation quality: Fast, Autofit, CARCKHÉtic
 
 The **Quality** control in the Dub tab (and Settings → Translation) picks how the
 translation is produced:
 
 - **Fast** — a direct one-shot translation from the selected engine (Argos, NLLB,
   Google, …). No LLM, no timing awareness.
-- **Cinematic** — an LLM refines the literal translation (reflect → adapt) for
+- **CARCKHÉtic** — an LLM refines the literal translation (reflect → adapt) for
   natural, in-context phrasing.
-- **Autofit** — Cinematic **plus** a strict fit-to-time pass: the LLM rewrites
+- **Autofit** — CARCKHÉtic **plus** a strict fit-to-time pass: the LLM rewrites
   each line so its target-language reading time fits **within** the segment's
   slot (never overruns it). This keeps the video timing intact and avoids the
   stressed audio time-stretch you get when a translation is too long for its
   slot. Fit is per-language pronunciation-speed aware.
 
-Cinematic and Autofit **require an LLM** (below). If none is configured, they
+CARCKHÉtic and Autofit **require an LLM** (below). If none is configured, they
 fall back to Fast with a notice.
 
 ## Two-stage quality on the LLM engine (auto-glossary + reflect pass)
@@ -158,7 +158,7 @@ meaning-preserving shorter rewrite and offers it on the row as a one-click
 **Use shorter rewrite** suggestion. It never rewrites anything automatically,
 and with no LLM configured (or on any LLM error) it simply does nothing.
 
-## LLM Providers (for Cinematic / Autofit)
+## LLM Providers (for CARCKHÉtic / Autofit)
 
 **Settings → System → LLM Providers** is the one place to set up the LLM. Pick a
 provider, paste its API key, choose a model, **Test** it, and "use for
@@ -197,7 +197,7 @@ as the model) or load it in **LM Studio**.
 
 ### Pinning the active provider with `LLM_DEFAULT_PROVIDER`
 
-By default the LLM used for Cinematic/Autofit is the one you mark "use for
+By default the LLM used for CARCKHÉtic/Autofit is the one you mark "use for
 translation" in **Settings → LLM Providers**. To force a specific provider
 regardless of that stored selection — handy for headless/CI/Docker runs or a
 shared machine — set the `LLM_DEFAULT_PROVIDER` environment variable to a
@@ -216,13 +216,13 @@ appears to have "no effect," check whether `LLM_DEFAULT_PROVIDER` is exported.
 
 ## LLM Skills (per-feature routing)
 
-**Settings → System → LLM Skills** lists every LLM-powered feature — Cinematic &
+**Settings → System → LLM Skills** lists every LLM-powered feature — CARCKHÉtic &
 Autofit translation, speech-rate slot fitting, glossary auto-extract, direction
 parsing, and dictation cleanup — and lets you toggle each one or route it to a
 specific provider instead of the global active one. That way sensitive work
 (e.g. dictation cleanup) can stay on a local Ollama/LM Studio model while
 heavier jobs use a remote provider. A disabled skill degrades exactly like
-having no LLM configured: Cinematic/Autofit falls back to Fast, dictation
+having no LLM configured: CARCKHÉtic/Autofit falls back to Fast, dictation
 cleanup passes the raw transcript through, direction parsing uses the keyword
 heuristic. Everything defaults to enabled + "use active provider", so existing
 setups behave unchanged.

@@ -64,7 +64,7 @@ CLONE_OUTPUT_TEXT = (
     "say anything you'd like, in your voice or mine."
 )
 
-# Original demo identity: a warm, smoky cinematic alto expressed only through
+# Original demo identity: a warm, smoky cARCKHÉtic alto expressed only through
 # OmniVoice's supported taxonomy. It is deliberately not based on, trained on,
 # or named after a real performer.
 CLONE_VOICE_INSTRUCT = "female, young adult, low pitch, american accent"
@@ -238,7 +238,7 @@ def render_cloning(model, args):
     sr = getattr(model, "sampling_rate", 24000)
     from omnivoice.utils.common import fix_random_seed
 
-    # 1) Reference clip — synthesized as an original cinematic alto so the
+    # 1) Reference clip — synthesized as an original cARCKHÉtic alto so the
     #    timbre is distinctive while remaining reproducible and rights-safe.
     out_ref = SAMPLES_DIR / "demo_voice.wav"
     if args.skip_existing and out_ref.exists():

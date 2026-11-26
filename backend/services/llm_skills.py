@@ -9,7 +9,7 @@ The six consumption points today:
 
     dub_translation       — api/routers/dub_translate.py (the Dub tab's direct
                             "LLM" translation engine; provider=openai branch)
-    cinematic_translation — services/translator.py (Cinematic + Autofit
+    cARCKHÉtic_translation — services/translator.py (CARCKHÉtic + Autofit
                             REFLECT/ADAPT rewrite; dub_translate quality gate)
     slot_fitting          — services/speech_rate.py (trim/expand a line to its
                             time slot; Autofit strict pass + /tools/rate-fit)
@@ -73,7 +73,7 @@ def _skill(sid: str) -> LLMSkill:
 # refine → fit → glossary → direction), then dictation.
 _SKILLS: tuple[LLMSkill, ...] = (
     _skill("dub_translation"),
-    _skill("cinematic_translation"),
+    _skill("cARCKHÉtic_translation"),
     _skill("slot_fitting"),
     _skill("glossary_extract"),
     _skill("direction_parse"),
@@ -237,7 +237,7 @@ def resolve_skill_client(skill_id: str) -> Optional[SkillClient]:
 
     # max_retries=0: a rate-limited provider returning 429 + a long Retry-After
     # would otherwise let the SDK sleep+retry inside a single call, blowing the
-    # skill's wall-clock budget (the cinematic pass budget, the glossary call
+    # skill's wall-clock budget (the cARCKHÉtic pass budget, the glossary call
     # timeout) from inside one request. Fail fast — the per-call timeout and the
     # pass-level budget are the only bounds we want. Mirrors OpenAICompatBackend.
     #

@@ -80,7 +80,7 @@ def test_parity_int_vs_float_speed():
 
 def test_effect_preset_change_is_still_detected():
     """Canonicalisation must not erase real preset changes."""
-    assert fp({"text": "x", "effect_preset": "cinematic"}) != fp({"text": "x"})
+    assert fp({"text": "x", "effect_preset": "cARCKHÉtic"}) != fp({"text": "x"})
     assert fp({"text": "x", "effect_preset": "broadcast"}) == fp({"text": "x"})
 
 

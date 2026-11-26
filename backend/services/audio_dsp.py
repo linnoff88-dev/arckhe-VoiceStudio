@@ -4,7 +4,7 @@ Audio DSP pipeline — broadcast-grade mastering + configurable effects chain.
 `apply_mastering()` is the shared pre-stage that runs before the user's
 effect preset: highpass + gentle compression only (see `MASTERING_CHAIN`).
 Reverb is deliberately NOT part of it — it is preset-declared only (e.g.
-cinematic, warm); a hidden reverb here used to bake echo into every non-raw
+cARCKHÉtic, warm); a hidden reverb here used to bake echo into every non-raw
 synthesis, which field reports flagged. `apply_effects_chain()` lets callers
 build custom pipelines from a list of named effects.
 
@@ -30,8 +30,8 @@ EFFECT_PRESETS = {
             {"type": "limiter", "threshold_db": -1.0},
         ],
     },
-    "cinematic": {
-        "label": "Cinematic",
+    "cARCKHÉtic": {
+        "label": "CARCKHÉtic",
         "icon": "🎬",
         "description": "Film-quality — spacious reverb, gentle compression.",
         "chain": [
@@ -104,7 +104,7 @@ def get_effect_chain(preset_id: str) -> list[dict]:
 #: Reverb must never live here — a hidden Reverb in this chain baked echo
 #: into every non-raw synthesis regardless of the chosen preset (field
 #: reports of echoey voices; the podcast preset even promises "no reverb").
-#: Reverb is preset-declared only (see EFFECT_PRESETS: cinematic, warm).
+#: Reverb is preset-declared only (see EFFECT_PRESETS: cARCKHÉtic, warm).
 MASTERING_CHAIN = [
     {"type": "highpass", "cutoff_hz": 60},
     {"type": "compressor", "threshold_db": -15, "ratio": 1.5, "attack_ms": 2.0, "release_ms": 100},

@@ -149,7 +149,7 @@ def rate_fit(req: RateFitReq):
 
 @router.get("/tools/effects")
 def list_effects():
-    """Return available audio effect presets (Broadcast, Cinematic, etc.)."""
+    """Return available audio effect presets (Broadcast, CARCKHÉtic, etc.)."""
     from services.audio_dsp import list_effect_presets
     return list_effect_presets()
 

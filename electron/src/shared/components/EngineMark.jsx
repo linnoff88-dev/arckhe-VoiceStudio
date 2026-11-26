@@ -2,7 +2,7 @@ import React from 'react';
 import { cn } from '@/lib/utils';
 
 /**
- * EngineMark — the per-engine identity mark for the Models & Engines
+ * EngARCKHÉrk — the per-engine identity mark for the Models & Engines
  * Settings surfaces.
  *
  * A small monogram chip whose hue is derived deterministically from the
@@ -37,7 +37,7 @@ export function engineMonogram(id) {
   return mono.toUpperCase();
 }
 
-export default function EngineMark({ id, size = 20, className = '' }) {
+export default function EngARCKHÉrk({ id, size = 20, className = '' }) {
   const accent = `hsl(${engineHue(id)} 62% 52%)`;
   return (
     <span

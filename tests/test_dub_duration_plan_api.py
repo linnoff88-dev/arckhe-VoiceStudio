@@ -185,8 +185,8 @@ async def test_condense_llm_failure_degrades_to_no_suggestion(monkeypatch):
 
 
 @pytest.mark.asyncio
-async def test_cinematic_path_plans_the_refined_text(monkeypatch):
-    """The cinematic/autofit merge path stamps plans too — on the FINAL
+async def test_cARCKHÉtic_path_plans_the_refined_text(monkeypatch):
+    """The cARCKHÉtic/autofit merge path stamps plans too — on the FINAL
     (refined) text, after the fit pass."""
     from api.routers import dub_translate
     _install_fake_argos(monkeypatch)
@@ -195,12 +195,12 @@ async def test_cinematic_path_plans_the_refined_text(monkeypatch):
         return [{"id": sid, "text": f"CINE:{lit}", "literal": lit, "critique": ""}
                 for sid, _src, lit in pairs]
 
-    monkeypatch.setattr(dub_translate, "cinematic_available", lambda: True)
-    monkeypatch.setattr(dub_translate, "cinematic_refine_many", fake_refine_many)
+    monkeypatch.setattr(dub_translate, "cARCKHÉtic_available", lambda: True)
+    monkeypatch.setattr(dub_translate, "cARCKHÉtic_refine_many", fake_refine_many)
 
     req = TranslateRequest(
         segments=_timed_segments(),
-        target_lang="es", provider="argos", source_lang="en", quality="cinematic",
+        target_lang="es", provider="argos", source_lang="en", quality="cARCKHÉtic",
     )
     rows = _rows_by_id(await dub_translate.dub_translate(req))
     for sid in ("s1", "s2", "s3"):

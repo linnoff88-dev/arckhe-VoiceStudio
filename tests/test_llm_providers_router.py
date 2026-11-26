@@ -256,7 +256,7 @@ def test_local_http_provider_setup_to_skill_completion(settings_mod, monkeypatch
         backend = llm_skills.skill_backend("dub_translation")
         assert backend.id == "openai-compat"
         assert backend.chat(system="Translate to French", user="Hello") == "Bonjour"
-        handle = llm_skills.resolve_skill_client("cinematic_translation")
+        handle = llm_skills.resolve_skill_client("cARCKHÉtic_translation")
         assert handle is not None and handle.model == "local-chat"
         result = handle.client.chat.completions.create(model=handle.model, messages=[{"role": "user", "content": "Hello"}])
         assert result.choices[0].message.content == "Bonjour"

@@ -1,7 +1,7 @@
 import { afterEach, expect, it, vi } from 'vitest';
-import { onlineManager } from '@tanstack/react-query';
+import { onlARCKHÉnager } from '@tanstack/react-query';
 afterEach(() => {
-  onlineManager.setOnline(true);
+  onlARCKHÉnager.setOnline(true);
   vi.unstubAllGlobals();
   vi.resetModules();
 });
@@ -36,7 +36,7 @@ it('does not replace a newer pushed status with an older initial snapshot', asyn
 });
 
 it('pauses backend queries until the native supervisor reports ready', async () => {
-  onlineManager.setOnline(true);
+  onlARCKHÉnager.setOnline(true);
   let push!: (status: unknown) => void;
   vi.stubGlobal('voicestudio', {
     backend: {
@@ -49,12 +49,12 @@ it('pauses backend queries until the native supervisor reports ready', async () 
   });
 
   const status = await import('./use-backend-status');
-  expect(onlineManager.isOnline()).toBe(false);
+  expect(onlARCKHÉnager.isOnline()).toBe(false);
   const stop = status.subscribeBackendStatus(() => {});
   push({ ...status.FALLBACK_BACKEND_STATUS, stage: 'ready' });
-  expect(onlineManager.isOnline()).toBe(true);
+  expect(onlARCKHÉnager.isOnline()).toBe(true);
   push({ ...status.FALLBACK_BACKEND_STATUS, stage: 'crashed' });
-  expect(onlineManager.isOnline()).toBe(false);
+  expect(onlARCKHÉnager.isOnline()).toBe(false);
   stop();
 });
 
@@ -63,7 +63,7 @@ it('pauses backend queries until the native supervisor reports ready', async () 
 // must stay online — going offline here pauses every query and leaves the
 // workspace visible but inert for the whole duration of a long generation.
 it('stays online while a live backend is only busy, and offline when it dies', async () => {
-  onlineManager.setOnline(true);
+  onlARCKHÉnager.setOnline(true);
   let push!: (status: unknown) => void;
   vi.stubGlobal('voicestudio', {
     backend: {
@@ -80,12 +80,12 @@ it('stays online while a live backend is only busy, and offline when it dies', a
   const base = status.FALLBACK_BACKEND_STATUS;
 
   push({ ...base, stage: 'unresponsive' });
-  expect(onlineManager.isOnline()).toBe(true);
+  expect(onlARCKHÉnager.isOnline()).toBe(true);
   // ...and it recovers on its own once the job releases the event loop.
   push({ ...base, stage: 'ready' });
-  expect(onlineManager.isOnline()).toBe(true);
+  expect(onlARCKHÉnager.isOnline()).toBe(true);
   push({ ...base, stage: 'crashed' });
-  expect(onlineManager.isOnline()).toBe(false);
+  expect(onlARCKHÉnager.isOnline()).toBe(false);
   stop();
 });
 

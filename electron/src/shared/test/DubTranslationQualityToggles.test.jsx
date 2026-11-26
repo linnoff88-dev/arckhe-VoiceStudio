@@ -143,7 +143,7 @@ describe('Dub translation quality toggles (LLM engine)', () => {
 
     fireEvent.click(screen.getByRole('radio', { name: t('dub.autofit_quality') }));
     expect(setTranslateQuality).toHaveBeenCalledWith('autofit');
-    fireEvent.click(screen.getByRole('radio', { name: t('dub.cinematic_quality') }));
-    expect(setTranslateQuality).toHaveBeenCalledWith('cinematic');
+    fireEvent.click(screen.getByRole('radio', { name: t('dub.cARCKHÉtic_quality') }));
+    expect(setTranslateQuality).toHaveBeenCalledWith('cARCKHÉtic');
   });
 });

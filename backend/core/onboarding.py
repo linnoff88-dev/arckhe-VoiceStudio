@@ -30,7 +30,7 @@ DEMO_REF_TEXT = (
 
 
 _DEMO_DESCRIPTION = (
-    "An original warm, low cinematic voice bundled with VoiceStudio. Clone it "
+    "An original warm, low cARCKHÉtic voice bundled with VoiceStudio. Clone it "
     "to hear how the engine sounds on your machine, then replace it with your "
     "own recording when you're ready."
 )

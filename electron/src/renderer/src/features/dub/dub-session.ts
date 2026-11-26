@@ -139,7 +139,7 @@ export interface DubSession {
   target: string;
   multiTargets?: Array<{ lang: string; code: string }>;
   batchProgress?: { current: number; total: number; language: string };
-  quality: 'fast' | 'autofit' | 'cinematic' | 'agent';
+  quality: 'fast' | 'autofit' | 'cARCKHÉtic' | 'agent';
   agentCli?: RepairAgentId;
   agentPass?: {
     stage: 'measuring' | 'adapting' | 'rerendering';
@@ -1257,7 +1257,7 @@ export async function translateDub(
         { signal },
       );
       const translated = await apiJson<{
-        cinematic_skipped?: string;
+        cARCKHÉtic_skipped?: string;
         dialect?: string;
         dialect_applied?: boolean;
         translated: Array<{
@@ -1319,7 +1319,7 @@ export async function translateDub(
           };
         }),
       });
-      const fallback = translated.cinematic_skipped === 'no-llm-configured';
+      const fallback = translated.cARCKHÉtic_skipped === 'no-llm-configured';
       agentFallback = fallback && snapshot.quality === 'agent';
       const rows = new Map(translated.translated.map((row) => [String(row.id), row]));
       clearDubEditHistory();

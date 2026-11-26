@@ -109,17 +109,17 @@ set `OMNIVOICE_ALLOW_PRIVATE_URL_IMPORTS=1` for the backend (for example in
 `~/.config/omnivoice/env`) and restart. Uploads accept common audio and video
 file types only; a playlist or manifest renamed as a video is refused. Explicit cookies.txt selection is available under URL sign-in options; optional caption downloads are available.
 
-Translation quality uses the existing backend Fast, Autofit and Cinematic modes.
+Translation quality uses the existing backend Fast, Autofit and CARCKHÉtic modes.
 The choice persists in the working draft and saved project (`translateQuality`),
 including legacy project imports. New media preserves the user's quality choice.
 If the backend reports that no LLM is configured, the UI selects Fast and shows
 an inline explanation with a link to LLM settings. It does not silently claim
-that Cinematic or Autofit completed. Browser fixtures cover this fallback and
+that CARCKHÉtic or Autofit completed. Browser fixtures cover this fallback and
 reload persistence; real LLM-backed quality passes remain unverified.
 
 **Translate with Agent** detects the installed Codex, Claude Code, OpenCode and Pi CLIs. Dubbing
 presents Agent and the active Google, Argos, NLLB or API engine as separate translator choices;
-Fast, Autofit and Cinematic remain quality choices for engine translation. The selected agent receives the complete ordered
+Fast, Autofit and CARCKHÉtic remain quality choices for engine translation. The selected agent receives the complete ordered
 dialogue, glossary, dialect and per-segment speech budget as untrusted data, returns a strict
 id-preserving translation, and never receives repository or filesystem write access. Google,
 Argos, NLLB and configured API translators remain available through the ordinary Translate All

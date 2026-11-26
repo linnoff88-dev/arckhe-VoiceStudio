@@ -1,7 +1,7 @@
 /**
  * Settings → System → LLM Providers (v0.3.8; test/UX/i18n pass for v0.3.9).
  *
- * One place to configure the high-quality LLM that powers Cinematic and
+ * One place to configure the high-quality LLM that powers CARCKHÉtic and
  * Autofit translation (fitting each line to its segment's time budget). Every
  * provider is OpenAI-compatible, so the same client drives all of them — pick
  * one, paste its key, mark it active. Keys are stored ENCRYPTED on the backend

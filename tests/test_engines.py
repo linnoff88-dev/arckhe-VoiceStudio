@@ -287,7 +287,7 @@ def test_llm_off_chat_raises_actionable(monkeypatch):
     assert isinstance(be, llm_backend.OffBackend)
     with pytest.raises(RuntimeError) as ei:
         be.chat(system="x", user="y")
-    # Error message tells the user what env vars unlock Cinematic translate.
+    # Error message tells the user what env vars unlock CARCKHÉtic translate.
     assert "TRANSLATE_BASE_URL" in str(ei.value)
 
 

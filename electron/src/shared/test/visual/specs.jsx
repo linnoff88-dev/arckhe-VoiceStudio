@@ -774,9 +774,9 @@ export const SPECS = {
         />
         <SettingRow
           icon={Sparkles}
-          title="Cinematic dubbing"
+          title="CARCKHÉtic dubbing"
           subtitle="Use the LLM rewrite pass for natural phrasing."
-          control={<SettingsToggle checked={false} onChange={() => {}} aria-label="Cinematic" />}
+          control={<SettingsToggle checked={false} onChange={() => {}} aria-label="CARCKHÉtic" />}
         />
         <SettingRow title="App version" control="0.3.8" mono />
       </Panel>

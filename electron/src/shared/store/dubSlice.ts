@@ -109,7 +109,7 @@ export interface DubSlice {
 
   // Optional regional dialect for translation (#280), BCP-47 like "es-AR".
   // '' = default (no regional preference). Honored by LLM-backed translate
-  // paths (OpenAI/Ollama provider or Cinematic quality).
+  // paths (OpenAI/Ollama provider or CARCKHÉtic quality).
   dubDialect: string;
 
   // Multi-language batch mode (P1.4) — the checkbox + language picks used by

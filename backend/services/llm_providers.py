@@ -13,7 +13,7 @@ Resolution precedence for every field (key / base_url / model), highest first:
 Local providers (Ollama, LM Studio) need no key — a "local" sentinel is used
 so the OpenAI client is happy. This keeps the local-first path fully offline:
 nothing is sent anywhere unless the user picks a remote provider *and* a
-feature gate (quality="cinematic"/"autofit") fires.
+feature gate (quality="cARCKHÉtic"/"autofit") fires.
 
 Keys entered in the UI are stored **encrypted** (never in `.env`, never
 returned to the client). `.env` keys remain a valid override for CI / power
@@ -614,7 +614,7 @@ def stored_active_provider_id() -> Optional[str]:
 
 
 def active_provider_id() -> Optional[str]:
-    """The provider Cinematic/Autofit should use.
+    """The provider CARCKHÉtic/Autofit should use.
 
     Precedence: env ``LLM_DEFAULT_PROVIDER`` → stored selection → first
     configured provider → None. Legacy ``TRANSLATE_BASE_URL`` users with no

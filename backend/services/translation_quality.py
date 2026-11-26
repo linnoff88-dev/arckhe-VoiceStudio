@@ -21,7 +21,7 @@ error, timeout, empty output, or divergent rewrite silently keeps the direct
 translation — callers get ``None`` back and move on.
 
 MT engines (argos/nllb/google/deepl/…) never reach this module: they have no
-prompts to inject into and no LLM to critique with. The Cinematic/Autofit
+prompts to inject into and no LLM to critique with. The CARCKHÉtic/Autofit
 refine for those engines lives in ``services/translator.py``.
 """
 from __future__ import annotations
@@ -269,7 +269,7 @@ def reflect_translation_sync(
     polished = (polished or "").strip()
     if not polished or polished == direct_text:
         return None
-    # Same divergence guard the Cinematic ADAPT step uses: wrong script,
+    # Same divergence guard the CARCKHÉtic ADAPT step uses: wrong script,
     # runaway length, or the critique leaking through as the "translation".
     from services.translator import refine_output_ok
 

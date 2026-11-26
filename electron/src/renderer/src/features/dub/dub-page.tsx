@@ -826,7 +826,7 @@ export function DubPage() {
   const errorMessage = session.asrModelMissing
     ? null
     : session.error === DUB_AGENT_UNAVAILABLE
-      ? t('dub_workflow.cinematic_no_llm')
+      ? t('dub_workflow.cARCKHÉtic_no_llm')
       : session.error === DUB_STOP_FAILED || session.error === 'Cancellation could not be confirmed'
         ? t('dub_workflow.stop_failed')
         : session.error;
@@ -1449,7 +1449,7 @@ export function DubPage() {
                   {t('settings.translate_quality_desc')}
                 </p>
                 <div className="flex flex-wrap gap-1">
-                  {(['fast', 'autofit', 'cinematic'] as const).map((quality) => (
+                  {(['fast', 'autofit', 'cARCKHÉtic'] as const).map((quality) => (
                     <Button
                       key={quality}
                       size="sm"
@@ -1517,7 +1517,7 @@ export function DubPage() {
             )}
             {session.translationFallback && (
               <div role="status" className="space-y-2 text-xs text-muted-foreground">
-                <p>{t('dub_workflow.cinematic_no_llm')}</p>
+                <p>{t('dub_workflow.cARCKHÉtic_no_llm')}</p>
                 <Link to="/settings/models/$family" params={{ family: 'llm' }}>
                   {t('engineSidebar.llm')}
                 </Link>

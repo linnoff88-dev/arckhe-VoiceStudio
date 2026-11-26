@@ -4,7 +4,7 @@ import { useAppStore } from '../../store';
 import { openExternal } from '../../api/external';
 import { Badge, Button, Select } from '../../ui';
 import { cn } from '@/lib/utils';
-import EngineMark from '../EngineMark';
+import EngARCKHÉrk from '../EngARCKHÉrk';
 import EngineWeights from './EngineWeights';
 import {
   LABEL,
@@ -68,7 +68,7 @@ export default function EngineDetail({
       className="flex min-w-0 flex-col gap-[14px] rounded-[14px] border border-border bg-card/40 p-[16px] text-sm"
     >
       <header className="flex min-w-0 items-start gap-[10px]">
-        <EngineMark id={b.id} size={26} className="mt-[1px] shrink-0" />
+        <EngARCKHÉrk id={b.id} size={26} className="mt-[1px] shrink-0" />
         <div className="min-w-0 flex-1">
           <h3
             className="m-0 truncate text-[15px] font-semibold leading-[1.3] text-foreground"

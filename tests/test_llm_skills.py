@@ -4,7 +4,7 @@ Covers the feat/llm-skills surface:
 
 * registry resolution precedence — per-skill override > active provider > none;
 * disabled semantics at every consumption point (monkeypatched): a disabled
-  skill degrades exactly like "no LLM configured" does today — Cinematic falls
+  skill degrades exactly like "no LLM configured" does today — CARCKHÉtic falls
   back to Fast, refinement passes through, direction parses heuristically,
   slot-fit returns the no-llm marker, glossary auto-extract 503s;
 * /api/settings/llm-skills round-trips + unknown skill/provider validation.
@@ -61,26 +61,26 @@ def _activate_groq(store):
 def test_global_off_disables_direct_clients_and_readiness(skills, store, monkeypatch):
     _activate_groq(store)
     monkeypatch.setenv("OMNIVOICE_LLM_BACKEND", "off")
-    skills.configure_skill("cinematic_translation", provider_override="groq")
-    assert skills.resolve_skill("cinematic_translation").ready is False
-    assert skills.resolve_skill_client("cinematic_translation") is None
+    skills.configure_skill("cARCKHÉtic_translation", provider_override="groq")
+    assert skills.resolve_skill("cARCKHÉtic_translation").ready is False
+    assert skills.resolve_skill_client("cARCKHÉtic_translation") is None
 
 
 def test_selected_off_matches_runtime_but_allows_explicit_skill_override(skills, store):
     from core import prefs
     _activate_groq(store)
     prefs.set_("llm_backend", "off")
-    assert skills.resolve_skill("cinematic_translation").ready is False
-    assert skills.resolve_skill_client("cinematic_translation") is None
-    skills.configure_skill("cinematic_translation", provider_override="groq")
-    assert skills.resolve_skill("cinematic_translation").ready is True
+    assert skills.resolve_skill("cARCKHÉtic_translation").ready is False
+    assert skills.resolve_skill_client("cARCKHÉtic_translation") is None
+    skills.configure_skill("cARCKHÉtic_translation", provider_override="groq")
+    assert skills.resolve_skill("cARCKHÉtic_translation").ready is True
 
 
 # ── Registry + resolution precedence ────────────────────────────────────────
 
 def test_all_skills_cover_every_consumption_point(skills):
     assert [s.id for s in skills.all_skills()] == [
-        "dub_translation", "cinematic_translation", "slot_fitting",
+        "dub_translation", "cARCKHÉtic_translation", "slot_fitting",
         "glossary_extract", "direction_parse", "dictation_refinement",
     ]
     for s in skills.all_skills():
@@ -90,7 +90,7 @@ def test_all_skills_cover_every_consumption_point(skills):
 
 def test_defaults_enabled_no_override_active_provider(skills, store):
     _activate_groq(store)
-    res = skills.resolve_skill("cinematic_translation")
+    res = skills.resolve_skill("cARCKHÉtic_translation")
     assert res.enabled is True
     assert res.source == "active"
     assert res.provider.id == "groq"
@@ -99,8 +99,8 @@ def test_defaults_enabled_no_override_active_provider(skills, store):
 
 def test_override_beats_active(skills, store):
     _activate_groq(store)
-    skills.configure_skill("cinematic_translation", provider_override="ollama")
-    res = skills.resolve_skill("cinematic_translation")
+    skills.configure_skill("cARCKHÉtic_translation", provider_override="ollama")
+    res = skills.resolve_skill("cARCKHÉtic_translation")
     assert res.source == "override"
     assert res.provider.id == "ollama"          # local: configured without a key
     assert res.ready is True
@@ -162,15 +162,15 @@ def test_unknown_provider_override_raises(skills, store):
 @pytest.mark.skipif(not _HAS_OPENAI, reason="openai package not installed")
 def test_client_none_when_disabled(skills, store):
     _activate_groq(store)
-    skills.configure_skill("cinematic_translation", enabled=False)
-    assert skills.resolve_skill_client("cinematic_translation") is None
+    skills.configure_skill("cARCKHÉtic_translation", enabled=False)
+    assert skills.resolve_skill_client("cARCKHÉtic_translation") is None
 
 
 @pytest.mark.skipif(not _HAS_OPENAI, reason="openai package not installed")
 def test_client_binds_override_provider(skills, store):
     _activate_groq(store)
-    skills.configure_skill("cinematic_translation", provider_override="ollama")
-    handle = skills.resolve_skill_client("cinematic_translation")
+    skills.configure_skill("cARCKHÉtic_translation", provider_override="ollama")
+    handle = skills.resolve_skill_client("cARCKHÉtic_translation")
     assert handle is not None
     assert handle.provider_id == "ollama"
     assert handle.model == "llama3.1"           # ollama's default model
@@ -180,7 +180,7 @@ def test_client_binds_override_provider(skills, store):
 @pytest.mark.skipif(not _HAS_OPENAI, reason="openai package not installed")
 def test_client_uses_active_when_no_override(skills, store):
     _activate_groq(store)
-    handle = skills.resolve_skill_client("cinematic_translation")
+    handle = skills.resolve_skill_client("cARCKHÉtic_translation")
     assert handle is not None and handle.provider_id == "groq"
 
 
@@ -201,7 +201,7 @@ def test_client_none_when_construction_fails(skills, store, monkeypatch):
         )
 
     monkeypatch.setattr(openai, "OpenAI", boom)
-    assert skills.resolve_skill_client("cinematic_translation") is None
+    assert skills.resolve_skill_client("cARCKHÉtic_translation") is None
 
 
 def test_backend_off_when_disabled(skills, store):
@@ -243,14 +243,14 @@ def test_backend_off_when_override_unconfigured(skills, store):
 
 # ── Disabled semantics per consumption point ────────────────────────────────
 
-def test_disabled_translation_reports_cinematic_unavailable(skills, store):
+def test_disabled_translation_reports_cARCKHÉtic_unavailable(skills, store):
     _activate_groq(store)
     from services import translator
-    assert translator.cinematic_available() is (_HAS_OPENAI and True)
-    skills.configure_skill("cinematic_translation", enabled=False)
-    assert translator.cinematic_available() is False
+    assert translator.cARCKHÉtic_available() is (_HAS_OPENAI and True)
+    skills.configure_skill("cARCKHÉtic_translation", enabled=False)
+    assert translator.cARCKHÉtic_available() is False
     # and the per-segment refine degrades to the literal with the no-llm marker
-    out = translator.cinematic_refine_sync(
+    out = translator.cARCKHÉtic_refine_sync(
         "hello", "hallo", source_lang="en", target_lang="de")
     assert out["text"] == "hallo" and out.get("degraded") == "no-llm"
 
@@ -396,16 +396,16 @@ def test_put_toggle_round_trips(settings_mod, store):
 def test_put_provider_override_round_trips(settings_mod, store):
     _activate_groq(store)
     body = settings_mod.set_llm_skill(
-        "cinematic_translation",
+        "cARCKHÉtic_translation",
         settings_mod._LLMSkillBody(provider_override="ollama"))
-    row = next(s for s in body["skills"] if s["id"] == "cinematic_translation")
+    row = next(s for s in body["skills"] if s["id"] == "cARCKHÉtic_translation")
     assert row["provider_override"] == "ollama"
     assert row["provider"] == "ollama" and row["provider_source"] == "override"
     assert row["provider_local"] is True
     # clear with "" → back to the active provider
     body = settings_mod.set_llm_skill(
-        "cinematic_translation", settings_mod._LLMSkillBody(provider_override=""))
-    row = next(s for s in body["skills"] if s["id"] == "cinematic_translation")
+        "cARCKHÉtic_translation", settings_mod._LLMSkillBody(provider_override=""))
+    row = next(s for s in body["skills"] if s["id"] == "cARCKHÉtic_translation")
     assert row["provider_override"] is None and row["provider"] == "groq"
 
 

@@ -139,12 +139,12 @@ class TranslateSegment(BaseModel):
     text: str
     target_lang: Optional[str] = None
     # Free-form delivery direction ("urgent, whispering") — feeds the
-    # cinematic reflect/adapt prompts. The frontend has sent this since
+    # cARCKHÉtic reflect/adapt prompts. The frontend has sent this since
     # Phase 4.2 but pydantic silently dropped it as an undeclared extra,
     # so the per-segment direction hint never reached the LLM.
     direction: Optional[str] = None
     # Available time slot (end - start, seconds) for rate-ratio prediction
-    # and the cinematic slot-fit pass. Same silent-drop fix as `direction`.
+    # and the cARCKHÉtic slot-fit pass. Same silent-drop fix as `direction`.
     slot_seconds: Optional[float] = None
     # Timeline position (seconds) — lets the duration planner borrow silence
     # from the gap to the NEXT segment when classifying fits/tight/impossible
@@ -159,10 +159,10 @@ class TranslateRequest(BaseModel):
     provider: Optional[str] = None
     source_lang: Optional[str] = None  # ISO 639-1; overrides job detection
     job_id: Optional[str] = None  # Dub job id, used to resolve detected source_lang
-    quality: Optional[str] = "fast"  # fast | cinematic | autofit | agent (measured render/rewrite loop)
+    quality: Optional[str] = "fast"  # fast | cARCKHÉtic | autofit | agent (measured render/rewrite loop)
     glossary: Optional[List[dict]] = None  # [{"source": "...", "target": "...", "note": "..."}]
     # Optional regional dialect (BCP-47, e.g. "es-AR", "pt-BR") — #280 item 2.
-    # Applied by LLM-backed paths (provider="openai" or quality="cinematic"):
+    # Applied by LLM-backed paths (provider="openai" or quality="cARCKHÉtic"):
     # the prompt asks for that region's vocabulary/grammar (e.g. Argentinian
     # voseo: "vos sos" instead of "tú eres"). Non-LLM providers (Argos, NLLB,
     # Google) can't honor it; the response then carries dialect_applied=false.

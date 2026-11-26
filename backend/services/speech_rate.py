@@ -6,7 +6,7 @@ to read at a natural pace. If it overshoots the source slot (= lip-sync
 will drift), ask the LLM to trim filler or slightly reflow. If it undershoots,
 expand. Loop until fit or max retries.
 
-Runs as a post-process on Cinematic translator output or manually via
+Runs as a post-process on CARCKHÉtic translator output or manually via
 `adjust_for_slot(...)`. Fast mode skips this — the whole point is the
 LLM-aware trimming, and Fast-mode users opted out of LLM calls.
 

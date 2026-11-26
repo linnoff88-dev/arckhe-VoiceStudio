@@ -21,8 +21,8 @@ OffBackend. Callers can override with `OMNIVOICE_LLM_BACKEND`.
 
 NOTE: cloud providers stay **opt-in** per the ROADMAP's privacy policy.
 Even with `TRANSLATE_API_KEY` set, the flag only turns on this backend;
-individual features (Cinematic translate, glossary auto-extract) still
-check their own `quality="cinematic"` gate / user action before calling.
+individual features (CARCKHÉtic translate, glossary auto-extract) still
+check their own `quality="cARCKHÉtic"` gate / user action before calling.
 """
 from __future__ import annotations
 
@@ -266,7 +266,7 @@ class OpenAICompatBackend(LLMBackend):
         and echo inline examples, so examples must arrive as prior chat
         turns, not inside the system prompt.
 
-        ``temperature`` is only forwarded when set (Cinematic/Autofit pin 0.2
+        ``temperature`` is only forwarded when set (CARCKHÉtic/Autofit pin 0.2
         — the provider default of 1.0 makes local models drift and invent);
         every other caller leaves it None and keeps the provider default.
 
@@ -354,7 +354,7 @@ class OffBackend(LLMBackend):
     def chat(self, **kw) -> str:
         raise RuntimeError(
             "No LLM backend configured. Set TRANSLATE_BASE_URL (+ TRANSLATE_API_KEY) "
-            "to use features that need one (Cinematic translate, glossary auto-extract)."
+            "to use features that need one (CARCKHÉtic translate, glossary auto-extract)."
         )
 
     def chat_messages(self, **kw) -> str:

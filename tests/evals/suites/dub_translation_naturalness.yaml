@@ -1,13 +1,13 @@
 # Dub translation naturalness v1 — semantic regression suite for the
-# cinematic translate chain (services/translator.py reflect+adapt pass).
+# cARCKHÉtic translate chain (services/translator.py reflect+adapt pass).
 #
-# System under test: cinematic_refine_sync(source, literal, ...) — each case
+# System under test: cARCKHÉtic_refine_sync(source, literal, ...) — each case
 # feeds a source line + a deliberately stiff literal translation; the judge
 # scores whether the adapted line reads like natural dialogue. NEVER a CI
 # gate (parity program Wave 0.3 hard rule).
 name: dub translation naturalness v1
 metadata:
-  system_under_test: services.translator.cinematic_refine_sync
+  system_under_test: services.translator.cARCKHÉtic_refine_sync
 cases:
   - name: english idiom adapts to spanish equivalent
     tags: [idiom, es]

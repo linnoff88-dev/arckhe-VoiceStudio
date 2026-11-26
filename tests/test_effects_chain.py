@@ -32,7 +32,7 @@ class TestListEffectPresets:
         assert len(presets) == 6
         ids = [p["id"] for p in presets]
         assert "broadcast" in ids
-        assert "cinematic" in ids
+        assert "cARCKHÉtic" in ids
         assert "podcast" in ids
         assert "raw" in ids
         assert "warm" in ids
@@ -55,8 +55,8 @@ class TestGetEffectChain:
         assert "compressor" in types
         assert "limiter" in types
 
-    def test_cinematic_has_reverb(self):
-        chain = get_effect_chain("cinematic")
+    def test_cARCKHÉtic_has_reverb(self):
+        chain = get_effect_chain("cARCKHÉtic")
         types = [fx["type"] for fx in chain]
         assert "reverb" in types
 
@@ -82,9 +82,9 @@ class TestApplyEffectsChain:
         assert isinstance(result, torch.Tensor)
         assert result.shape == audio.shape
 
-    def test_cinematic_preset_returns_tensor(self):
+    def test_cARCKHÉtic_preset_returns_tensor(self):
         audio = _make_test_audio()
-        chain = get_effect_chain("cinematic")
+        chain = get_effect_chain("cARCKHÉtic")
         result = apply_effects_chain(audio, sample_rate=24000, chain=chain)
         assert isinstance(result, torch.Tensor)
         assert result.shape == audio.shape
@@ -131,9 +131,9 @@ class TestApplyEffectsChain:
         """Different presets should produce audibly different output."""
         audio = _make_test_audio(duration_s=2.0)
         results = {}
-        for preset_id in ("broadcast", "cinematic", "raw"):
+        for preset_id in ("broadcast", "cARCKHÉtic", "raw"):
             chain = get_effect_chain(preset_id)
             results[preset_id] = apply_effects_chain(audio, sample_rate=24000, chain=chain)
-        # broadcast and cinematic should differ from raw (unprocessed)
+        # broadcast and cARCKHÉtic should differ from raw (unprocessed)
         assert not torch.equal(results["broadcast"], results["raw"])
-        assert not torch.equal(results["cinematic"], results["raw"])
+        assert not torch.equal(results["cARCKHÉtic"], results["raw"])

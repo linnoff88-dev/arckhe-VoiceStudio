@@ -1,4 +1,4 @@
-import { QueryClient, QueryClientProvider, onlineManager } from '@tanstack/react-query';
+import { QueryClient, QueryClientProvider, onlARCKHÉnager } from '@tanstack/react-query';
 import { act, renderHook, waitFor } from '@testing-library/react';
 import type { ReactNode } from 'react';
 import { afterEach, expect, it, vi } from 'vitest';
@@ -45,7 +45,7 @@ function setup() {
 
 afterEach(() => {
   vi.useRealTimers();
-  onlineManager.setOnline(true);
+  onlARCKHÉnager.setOnline(true);
   vi.clearAllMocks();
   patchCloneSettings({ selectedProfileId: null, refText: '' });
   localStorage.clear();
@@ -116,7 +116,7 @@ it('does not expire queued confirmation while offline longer than its request de
       const first = result.current.mutateAsync('v1').catch((error) => error);
       const next = second.result.current.mutateAsync('v2').catch((error) => error);
       await Promise.resolve();
-      onlineManager.setOnline(false);
+      onlARCKHÉnager.setOnline(false);
       responses.resolve();
       await Promise.all([first, next]);
     });
@@ -127,7 +127,7 @@ it('does not expire queued confirmation while offline longer than its request de
     expect(mock.list).not.toHaveBeenCalled();
     expect(cloneSettingsStore.state.selectedProfileId).toBe('v1');
     await act(async () => {
-      onlineManager.setOnline(true);
+      onlARCKHÉnager.setOnline(true);
       await vi.advanceTimersByTimeAsync(0);
     });
     expect(mock.list).toHaveBeenCalledTimes(2);
@@ -344,7 +344,7 @@ it('cancels an older profile query before confirming deletion after an error', a
 
 it('settles a deletion error while the native backend is offline and preserves selections', async () => {
   mock.remove.mockImplementation(async () => {
-    onlineManager.setOnline(false);
+    onlARCKHÉnager.setOnline(false);
     throw new Error('backend offline');
   });
   mock.list.mockRejectedValue(new Error('backend offline'));
@@ -365,7 +365,7 @@ it('settles a deletion error while the native backend is offline and preserves s
     expect(readDraft().profileId).toBe('v1');
     expect(mock.list).not.toHaveBeenCalled();
   } finally {
-    onlineManager.setOnline(true);
+    onlARCKHÉnager.setOnline(true);
     await act(async () => {
       await deletion;
     });
@@ -376,7 +376,7 @@ it.each(['deleted', 'rollback', 'unreachable'])(
   'reconciles a deletion error after backend readiness without assuming deletion: %s',
   async (serverOutcome) => {
     mock.remove.mockImplementation(async () => {
-      onlineManager.setOnline(false);
+      onlARCKHÉnager.setOnline(false);
       throw new Error('backend stopped after DELETE');
     });
     if (serverOutcome === 'deleted') mock.list.mockResolvedValue([profile({ id: 'v2' })]);
@@ -398,7 +398,7 @@ it.each(['deleted', 'rollback', 'unreachable'])(
       expect(readDraft().profileId).toBe('v1');
 
       await act(async () => {
-        onlineManager.setOnline(true);
+        onlARCKHÉnager.setOnline(true);
       });
       await waitFor(() => expect(mock.list).toHaveBeenCalledTimes(1));
       await waitFor(() =>
@@ -421,7 +421,7 @@ it.each(['paused', 'fetching'])(
   async (confirmationState) => {
     const stale = deferred<Profile[]>();
     mock.remove.mockImplementation(async () => {
-      if (confirmationState === 'paused') onlineManager.setOnline(false);
+      if (confirmationState === 'paused') onlARCKHÉnager.setOnline(false);
       throw new Error('cleanup incomplete');
     });
     mock.list.mockReturnValue(stale.promise);
@@ -444,7 +444,7 @@ it.each(['paused', 'fetching'])(
     const remounted = renderHook(() => useProfiles(), { wrapper });
     try {
       await act(async () => {
-        onlineManager.setOnline(true);
+        onlARCKHÉnager.setOnline(true);
         stale.resolve([profile({ id: 'v2', name: 'Stale deletion result' })]);
       });
       expect(mock.list).toHaveBeenCalledTimes(confirmationState === 'paused' ? 0 : 1);
@@ -515,7 +515,7 @@ it('settles two in-flight DELETE errors offline and confirms both after reconnec
     });
     await waitFor(() => expect(mock.remove).toHaveBeenCalledTimes(2));
     await act(async () => {
-      onlineManager.setOnline(false);
+      onlARCKHÉnager.setOnline(false);
       responses.resolve();
       await Promise.all([firstError, secondError]);
     });
@@ -528,7 +528,7 @@ it('settles two in-flight DELETE errors offline and confirms both after reconnec
     expect(readDraft().profileId).toBe('v2');
 
     await act(async () => {
-      onlineManager.setOnline(true);
+      onlARCKHÉnager.setOnline(true);
     });
     await waitFor(() => expect(mock.list).toHaveBeenCalledTimes(2));
     await waitFor(() => {
@@ -562,7 +562,7 @@ it.each([true, false])(
     });
     await waitFor(() => expect(mock.remove).toHaveBeenCalledTimes(2));
     await act(async () => {
-      onlineManager.setOnline(false);
+      onlARCKHÉnager.setOnline(false);
       responses.resolve();
       await Promise.all([firstError, secondError]);
     });
@@ -577,7 +577,7 @@ it.each([true, false])(
     const remounted = renderHook(() => useProfiles(), { wrapper });
     try {
       await act(async () => {
-        onlineManager.setOnline(true);
+        onlARCKHÉnager.setOnline(true);
       });
       expect(mock.list).not.toHaveBeenCalled();
       expect(client.getQueryData(queryKeys.profiles)).toEqual(currentProfiles);
@@ -625,7 +625,7 @@ it('uses normal query-client defaults and identity without fetching while offlin
     <QueryClientProvider client={client}>{children}</QueryClientProvider>
   );
   mock.remove.mockImplementation(async () => {
-    onlineManager.setOnline(false);
+    onlARCKHÉnager.setOnline(false);
     throw new Error('backend offline');
   });
   mock.list.mockResolvedValue([]);
@@ -646,7 +646,7 @@ it('uses normal query-client defaults and identity without fetching while offlin
     expect(mock.list).not.toHaveBeenCalled();
 
     await act(async () => {
-      onlineManager.setOnline(true);
+      onlARCKHÉnager.setOnline(true);
     });
     await waitFor(() => expect(mock.list).toHaveBeenCalledTimes(1));
     await waitFor(() => {

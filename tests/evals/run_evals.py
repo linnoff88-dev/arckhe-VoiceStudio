@@ -39,10 +39,10 @@ def _llm_ready() -> tuple[bool, str]:
 
 async def _translator_agent(case_input: dict) -> str:
     """System under test for the dub-naturalness suite."""
-    from services.translator import cinematic_refine_sync
+    from services.translator import cARCKHÉtic_refine_sync
 
     result = await asyncio.to_thread(
-        cinematic_refine_sync,
+        cARCKHÉtic_refine_sync,
         case_input["source"],
         case_input["literal"],
         source_lang=case_input.get("source_lang", "en"),

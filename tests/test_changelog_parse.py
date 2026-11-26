@@ -42,7 +42,7 @@ A stability-focused release that makes first-run and Windows "just work," ships
 ### Added
 
 - **"Autofit" translation quality — the dub keeps the video's timing.** A new
-  quality alongside Fast and Cinematic: the LLM rewrites each translated line so
+  quality alongside Fast and CARCKHÉtic: the LLM rewrites each translated line so
   it fits. (#838)
 - **A new LLM Providers settings page.** One page for **16 providers**. (#850)
 
@@ -84,7 +84,7 @@ def test_wrapped_bullets_are_joined_to_one_logical_line():
     assert len(bullets) == 2
     # Continuation lines join with single spaces — no newlines, no double spaces.
     assert "\n" not in bullets[0]
-    assert "quality alongside Fast and Cinematic" in bullets[0]
+    assert "quality alongside Fast and CARCKHÉtic" in bullets[0]
     assert bullets[0].endswith("(#838)")
     # The wrapped intro paragraph joins too.
     assert r["intro"].startswith("A stability-focused release")

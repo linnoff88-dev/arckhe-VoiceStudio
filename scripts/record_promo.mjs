@@ -19,7 +19,7 @@ if (!fs.existsSync(OUTPUT_DIR)) {
 }
 
 async function run() {
-  console.log('🎬 Starting Cinematic Promo Recording...');
+  console.log('🎬 Starting CARCKHÉtic Promo Recording...');
 
   const browser = await chromium.launch({
     headless: false,
@@ -44,11 +44,11 @@ async function run() {
   let recordingOffsetSeconds = 0;
   const scriptStartTime = Date.now();
 
-  // Helper for cinematic pausing
+  // Helper for cARCKHÉtic pausing
   const wait = (ms) => new Promise(r => setTimeout(r, ms));
 
   // Helper for smooth zoom injections
-  const cinematicZoom = async (selector, scale, xOffset = 0, yOffset = 0) => {
+  const cARCKHÉticZoom = async (selector, scale, xOffset = 0, yOffset = 0) => {
     await page.evaluate(({ selector, scale, xOffset, yOffset }) => {
       const el = document.querySelector('body');
       el.style.transition = 'transform 2s cubic-bezier(0.25, 1, 0.5, 1)';
@@ -83,10 +83,10 @@ async function run() {
     console.log('⏳ Waiting for dubbing workspace to render...');
     await wait(3500);
 
-    // 🎥 Cinematic Zoom on the Video Player
+    // 🎥 CARCKHÉtic Zoom on the Video Player
     console.log('📍 Zooming on Video Playback...');
     // Assuming video is roughly in the top left/center of the main view
-    await cinematicZoom('.video-player-container', 1.4, 20, 30);
+    await cARCKHÉticZoom('.video-player-container', 1.4, 20, 30);
     await wait(2000);
 
     // Play the video
@@ -108,14 +108,14 @@ async function run() {
     console.log('📍 Highlighting Segment Controls...');
     await resetZoom();
     await wait(1500);
-    await cinematicZoom('.segment-table', 1.3, 80, 50);
+    await cARCKHÉticZoom('.segment-table', 1.3, 80, 50);
     await wait(3000);
 
     // Highlight Output Options
     console.log('📍 Showing Export Options...');
     await resetZoom();
     await wait(1000);
-    await cinematicZoom('text=Output Options', 1.5, 50, 95);
+    await cARCKHÉticZoom('text=Output Options', 1.5, 50, 95);
     await wait(3000);
 
     // Reset zoom

@@ -27,7 +27,7 @@ export function useLlmSkills() {
   });
 }
 
-const agentFitSkillIds = ['cinematic_translation', 'slot_fitting'];
+const agentFitSkillIds = ['cARCKHÉtic_translation', 'slot_fitting'];
 
 export function agentFitSkillsReady(data: { skills: LlmSkill[] } | undefined): boolean {
   return agentFitSkillIds.every((id) =>

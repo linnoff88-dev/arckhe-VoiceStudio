@@ -7,7 +7,7 @@ set -euo pipefail
 
 SITE_URL="https://github.com/debpalash/VoiceStudio"
 SITE_NAME="VoiceStudio"
-SITE_DESC="Open-source ElevenLabs alternative — cinematic audio dubbing, voice cloning & TTS in 646 languages, runs 100% locally"
+SITE_DESC="Open-source ElevenLabs alternative — cARCKHÉtic audio dubbing, voice cloning & TTS in 646 languages, runs 100% locally"
 RSS_URL="https://github.com/debpalash/VoiceStudio/releases.atom"
 
 GREEN='\033[0;32m'

@@ -1,9 +1,9 @@
 """Regression guard: the `openai` client must stay a declared dependency.
 
-Cinematic dub refinement, glossary auto-extract, and LLM-based translation all
+CARCKHÉtic dub refinement, glossary auto-extract, and LLM-based translation all
 `from openai import OpenAI`. It was previously undeclared in pyproject, so a fresh
-`uv sync` never installed it and Cinematic was dead-on-arrival on every source
-install — the UI showed "Cinematic needs an LLM" even with Ollama running and
+`uv sync` never installed it and CARCKHÉtic was dead-on-arrival on every source
+install — the UI showed "CARCKHÉtic needs an LLM" even with Ollama running and
 configured, because `OpenAICompatBackend.is_available()` returned "openai package
 missing" (reported on Discord). These tests fail loudly if the dep is dropped.
 """
