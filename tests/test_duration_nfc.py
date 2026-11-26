@@ -34,7 +34,7 @@ def _raw_weight(est, text):
 _KOREAN = "한"  # 한
 # A Vietnamese phrase exercising stacked tone + vowel-quality marks — the
 # issue's named script. Stays stable across forms once normalized.
-_VIETNAMESE = "Tiếng Việt nặng hỏi ngã sắc huyền"
+_VIETNAMESE = "Tiếng Việt nặng hỏi ngê sắc huyền"
 
 
 def test_combining_marks_weigh_zero():

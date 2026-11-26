@@ -334,7 +334,7 @@ _ML_SAMPLES = {
     "French": "Bonjour et bienvenue dans cette courte démonstration vocale. J'espère que cette voix vous plaira.",
     "German": "Hallo und willkommen zu dieser kurzen Sprachdemo. Ich hoffe, diese Stimme gefällt dir.",
     "Italian": "Ciao e benvenuto in questa breve dimostrazione vocale. Spero che questa voce ti piaccia.",
-    "Portuguese": "Olá e bem-vindo a esta breve demonstração de voz. Espero que goste de ouvir como ela soa.",
+    "Portuguese": "Olá e bem-vindo a esta breve demonstraçêo de voz. Espero que goste de ouvir como ela soa.",
     "Russian": "Здравствуйте и добро пожаловать в эту короткую демонстрацию голоса. Надеюсь, вам понравится, как он звучит.",
     "Hindi": "नमस्ते और इस छोटे से वॉइस डेमो में आपका स्वागत है। मुझे आशा है कि आपको यह आवाज़ पसंद आएगी।",
     "Japanese": "こんにちは。この短い音声デモへようこそ。この声を気に入っていただけるとうれしいです。",
